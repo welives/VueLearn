@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>插值</title>
+    <script src="../vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <p @click="msg='yooo'">Message: {{ msg }}</p>
+      <p v-once>这个将不会改变: {{ msg }}</p>
+    </div>
+    <script>
+      const vm = new Vue({
+        data() {
+          return {
+            msg: 'hello world'
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

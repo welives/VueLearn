@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>处理用户输入</title>
+    <script src="../vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <p>{{ message }}</p>
+      <button @click="reverseMsg">逆转消息</button>
+      <input type="text" ref="testRef" v-model="message" @click="testRef" />
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            message: 'Hello Vue.js'
+          }
+        },
+        methods: {
+          reverseMsg() {
+            this.message = this.message
+              .split('')
+              .reverse()
+              .join('')
+          },
+          testRef() {
+            console.log(this.$refs.testRef.value)
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>组件化应用构建</title>
+    <script src="../vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <ol>
+        <todo-item></todo-item>
+      </ol>
+      <ul>
+        <!-- 子组件通过prop接口获取父组件传递过来的数据 -->
+        <prop-item v-for="(item, index) in propList" :key="index" :todo="item"></prop-item>
+      </ul>
+    </div>
+    <script>
+      Vue.component('todo-item', { template: `<li>这是个待办项</li>` })
+      Vue.component('prop-item', {
+        props: { todo: { type: String, default: '' } },
+        template: `<li>{{todo.text}}</li>`
+      })
+      new Vue({
+        data() {
+          return {
+            propList: [{ text: '蔬菜' }, { text: '奶酪' }, { text: '随便其它什么人吃的东西' }]
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

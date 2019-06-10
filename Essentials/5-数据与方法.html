@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>数据与方法</title>
+    <script src="../vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app" @click="data.a++">
+      {{ data.a }}
+      <!-- 这里的 obj.foo 不会更新！ -->
+      <p>{{ obj.foo }}</p>
+      <button @click.stop="obj.foo='yoooooooooo'">尝试修改</button>
+    </div>
+    <script>
+      const data = { a: 1 }
+      const obj = { foo: 'bar' }
+      Object.freeze(obj)
+      const vm = new Vue({
+        // 只有当实例被创建时 data 中存在的属性才是响应式的
+        data: {
+          data,
+          obj
+        },
+        watch: {
+          // 注意，不应该使用箭头函数来定义 watcher 函数
+          // 理由是箭头函数绑定了父级作用域的上下文，所以 this 将不会按照期望指向 Vue 实例
+          'data.a': function(newVal, oldVal) {
+            console.log(this.data.a)
+            console.log('new: %s, old: %s', newVal, oldVal)
+          }
+        }
+      }).$mount('#app')
+
+      console.log('vm.data.a === data.a : ', vm.data.a === data.a)
+      console.log('vm.$data.obj === obj : ', vm.$data.obj === obj)
+      console.log('vm.$el === document.querySelector("#app") : ', vm.$el === document.querySelector('#app'))
+      vm.$watch('obj.foo', function(newVal, oldVal) {
+        console.log('new: %s, old: %s', newVal, oldVal)
+      })
+    </script>
+  </body>
+</html>
