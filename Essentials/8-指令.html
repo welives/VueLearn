@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>指令</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>参数</h3>
+      <p>
+        <a :href="url+'.html'">{{ url }}</a>
+      </p>
+      <button @click="changeUrl()">修改URL</button>
+      <hr />
+
+      <h3>动态参数</h3>
+      <p>
+        <!-- 注意: 这里的动态参数名不能含有大写字母,否则会报警告 -->
+        <a :[attributename]="url+'.html'" @[eventname]="onMouseOver()">{{ url }}</a>
+      </p>
+      <hr />
+
+      <h3>修饰符</h3>
+      <form @submit.prevent="onSubmit">
+        <input type="submit" value="提交" />
+      </form>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            url: '1-声明式渲染',
+            attributename: 'href',
+            eventname: 'mouseover'
+          }
+        },
+        methods: {
+          changeUrl() {
+            this.url = '2-条件与循环'
+          },
+          onMouseOver() {
+            this.url = '3-处理用户输入'
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>
