@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>v-for</title>
+    <script src="../vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>用 v-for 把一个数组对应为一组元素</h3>
+      <ul>
+        <li v-for="(item, index) in items" :key="index">{{ parentMessage }} - {{ index }} - {{ item.message }}</li>
+      </ul>
+      <hr />
+
+      <h3>在 v-for 里使用对象</h3>
+      <ul>
+        <li v-for="(value, name, index) in object" :key="index">{{ index }}. {{ name }}: {{ value }}</li>
+      </ul>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            parentMessage: 'Parent',
+            items: [{ message: 'Foo' }, { message: 'Bar' }],
+            object: {
+              title: 'How to do lists in Vue',
+              author: 'Jane Doe',
+              publishedAt: '2016-04-10'
+            }
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

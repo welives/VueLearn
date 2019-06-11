@@ -15,12 +15,31 @@
       <hr />
 
       <h3>计算属性缓存-vs-方法</h3>
+      <!-- 计算属性是基于它们的响应式依赖进行缓存的 -->
+      <p>经过方法处理后的消息: "{{ reversedMessage }}"</p>
+      <p>{{ now }}</p>
+      <button @click="changeMsg()">修改消息</button>
+      <hr />
+
+      <h3>计算属性-vs-侦听属性</h3>
+      <div>{{ 'fullName : ' + fullName }}</div>
+      <div>{{ 'newFullName : ' + newFullName }}</div>
+      <hr />
+
+      <h3>计算属性的-setter</h3>
+      <p>firstName <input type="text" v-model="firstName" /></p>
+      <p>lastName <input type="text" v-model="lastName" /></p>
+      <p>fullName <input type="text" v-model="fullName" /></p>
+      <p>newFullName <input type="text" v-model="newFullName" /></p>
     </div>
     <script>
-      new Vue({
+      const vm = new Vue({
         data() {
           return {
-            message: 'hello'
+            message: 'hello',
+            firstName: 'Foo',
+            lastName: 'Bar',
+            fullName: 'Foo Bar'
           }
         },
         computed: {
@@ -29,6 +48,44 @@
               .split('')
               .reverse()
               .join('')
+          },
+          now() {
+            return Math.round(Date.now() / 1000)
+          },
+          // 计算属性默认只有 getter ，不过在需要时你也可以提供一个 setter
+          newFullName: {
+            // getter
+            get() {
+              return this.firstName + ' ' + this.lastName
+            },
+            // setter
+            set(newVal) {
+              console.log('watch newFullName : ', newVal)
+              const names = newVal.split(' ')
+              this.firstName = names[0]
+              this.lastName = names[names.length - 1]
+            }
+          }
+        },
+        watch: {
+          firstName(val) {
+            console.log('watch firstName : ', val)
+            this.fullName = val + ' ' + this.lastName
+          },
+          lastName(val) {
+            console.log('watch lastName : ', val)
+            this.fullName = this.firstName + ' ' + val
+          }
+        },
+        methods: {
+          reversedMsg() {
+            return this.message
+              .split('')
+              .reverse()
+              .join('')
+          },
+          changeMsg() {
+            this.message = 'Awesome Vue.js'
           }
         }
       }).$mount('#app')

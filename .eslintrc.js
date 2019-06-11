@@ -151,7 +151,6 @@ module.exports = {
     ], // 禁止出现未使用过的变量
     'no-undef': 'error', // 禁用未声明的变量，除非它们在 /*global */ 注释中被提到
     'no-undef-init': 'error', // 禁止将变量初始化为 undefined
-
     // Stylistic Issues
     'array-bracket-newline': 'off', // 在数组开括号后和闭括号前强制换行
     'array-bracket-spacing': ['error', 'never'], // 强制数组方括号中使用一致的空格
@@ -165,7 +164,7 @@ module.exports = {
       }
     ], // 强制在代码块中使用一致的大括号风格
     camelcase: [
-      'error',
+      'off',
       {
         properties: 'always'
       }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>侦听器</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>
+        Ask a yes/no question:
+        <input v-model="question" @blur="debouncedGetAnswer()" />
+      </p>
+      <p>{{ answer }}</p>
+      <div v-if="imgUrl"><img :src="imgUrl" alt="" /></div>
+    </div>
+    <script src="../axios.js"></script>
+    <script src="../lodash.js"></script>
+    <script>
+      const vm = new Vue({
+        data() {
+          return {
+            question: '',
+            answer: 'I cannot give you an answer until you ask a question!',
+            imgUrl: ''
+          }
+        },
+        watch: {
+          question(newVal, oldVal) {
+            this.answer = 'Waiting for you to stop typing...'
+            this.imgUrl = ''
+          }
+        },
+        created() {
+          // `_.debounce` 是一个通过 Lodash 限制操作频率的函数
+          this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+        },
+        methods: {
+          getAnswer() {
+            if (this.question.indexOf('?') === -1) {
+              this.answer = 'Questions usually contain a question mark. ;-)'
+              return
+            }
+            this.answer = 'Thinking...'
+            const self = this
+            axios
+              .get('https://yesno.wtf/api')
+              .then((response) => {
+                // 转换字符串首字母为大写，剩下为小写
+                console.log(response)
+
+                self.answer = _.capitalize(response.data.answer)
+                self.imgUrl = response.data.image
+              })
+              .catch((e) => {
+                self.answer = 'Error! Could not reach the API. ' + e
+              })
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>v-if</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>在&lt;template&gt;元素上使用-v-if-条件渲染分组</h3>
+      <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </template>
+      <hr />
+
+      <h3>v-else</h3>
+      <div v-if="Math.random() > 0.5">
+        Now you see me
+      </div>
+      <div v-else>
+        Now you don't
+      </div>
+      <hr />
+
+      <h3>v-else-if</h3>
+      <div v-if="type === 'A'">
+        A
+      </div>
+      <div v-else-if="type === 'B'">
+        B
+      </div>
+      <div v-else-if="type === 'C'">
+        C
+      </div>
+      <div v-else>
+        Not A/B/C
+      </div>
+      <hr />
+
+      <h3>用 key 管理可复用的元素</h3>
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username" :key="key" />
+      </template>
+      <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" :key="key" />
+      </template>
+      <p>
+        <button @click.stop="changeType">切换登录方式</button>
+      </p>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            ok: true,
+            type: '',
+            loginType: 'username'
+          }
+        },
+        computed: {
+          key() {
+            return this.loginType !== undefined ? this.loginType + +new Date() : this.loginType + +new Date()
+          }
+        },
+        methods: {
+          changeType() {
+            if (this.loginType === 'username') {
+              this.loginType = ''
+            } else {
+              this.loginType = 'username'
+            }
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>
