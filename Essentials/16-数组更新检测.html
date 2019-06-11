@@ -14,12 +14,61 @@
         <li v-for="(item, index) in items" :key="index">{{ item.message }}</li>
       </ul>
       <button @click="items.push({message:'Baz'})">增加项目</button>
+      <hr />
+
+      <h3>替换数组</h3>
+      <button @click="replaceItems()">替换数组</button>
+      <hr />
+
+      <h3>注意事项</h3>
+      <ul>
+        <li v-for="(item, index) in tests" :key="index">{{ item }}</li>
+      </ul>
+      <div>
+        <p>1. 当你利用索引直接设置一个数组项时，例如：<code>vm.items[indexOfItem] = newValue</code></p>
+        <button @click="setValue1()">点我设置数组元素并不会生效</button>
+        <button @click="setValue2()">但是点我就可以</button>
+        <button @click="setValue3()">点我也可以</button>
+      </div>
+      <div>
+        <p>2. 当你修改数组的长度时，例如：<code>vm.items.length = newLength</code></p>
+        <button @click="changeLength1()">点我修改数组长度并不会生效</button>
+        <button @click="changeLength2()">但是点我就可以</button>
+      </div>
     </div>
     <script>
       new Vue({
         data() {
           return {
-            items: [{ message: 'Foo' }, { message: 'Bar' }]
+            items: [{ message: 'Foo' }, { message: 'Bar' }],
+            tests: ['a', 'b', 'c']
+          }
+        },
+        methods: {
+          replaceItems() {
+            this.items = this.items.filter((item) => {
+              return item.message.match(/Foo/)
+            })
+          },
+          setValue1() {
+            this.tests[1] = 'x'
+            console.log(this.tests)
+          },
+          setValue2() {
+            this.$set(this.tests, 1, 'x')
+            console.log(this.tests)
+          },
+          setValue3() {
+            this.tests.splice(1, 1, 'x')
+            console.log(this.tests)
+          },
+          changeLength1() {
+            this.tests.length = 2
+            console.log(this.tests)
+          },
+          changeLength2() {
+            this.tests.splice(2)
+            console.log(this.tests)
           }
         }
       }).$mount('#app')

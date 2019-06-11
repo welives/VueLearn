@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>在组件上使用 v-for</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <form @submit.prevent="addNewTodo()">
+        <label for="new-todo">Add a todo</label>
+        <input type="text" v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat" />
+        <button>Add</button>
+      </form>
+      <ul>
+        <li is="todo-item" v-for="(todo, index) in todos" :key="todo.id" :title="todo.title" @remove="todos.splice(index,1)"></li>
+      </ul>
+    </div>
+    <script>
+      Vue.component('todo-item', {
+        props: { title: { type: String, default: '' } },
+        template: `
+          <li>
+            {{title}}
+            <button @click="$emit('remove')">Remove</button>
+          </li>
+        `
+      })
+      new Vue({
+        data() {
+          return {
+            newTodoText: '',
+            todos: [
+              {
+                id: 1,
+                title: 'Do the dishes'
+              },
+              {
+                id: 2,
+                title: 'Take out the trash'
+              },
+              {
+                id: 3,
+                title: 'Mow the lawn'
+              }
+            ],
+            nextToId: 4
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>对象变更检测注意事项</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>对象变更检测注意事项</h3>
+      <div>{{ 'name: ' + userProfile.name }}</div>
+      <div v-if="userProfile.age">{{ 'age: ' + userProfile.age }}</div>
+      <div v-if="userProfile.sex">{{ 'sex: ' + userProfile.sex }}</div>
+      <div v-if="userProfile.favoriteColor">{{ 'favoriteColor: ' + userProfile.favoriteColor }}</div>
+      <button @click="addOne()">添加一个新的属性</button>
+      <button @click="addMore()">添加多个新的属性</button>
+      <hr />
+
+      <h3>显示过滤-排序后的结果</h3>
+      <div>
+        <ul>
+          <li v-for="(item, index) in numbers" :key="index">{{ item }}</li>
+        </ul>
+        <button @click="replaceNumber()">显示Numbers数组中能被2整除的数</button>
+      </div>
+      <div>
+        <ul>
+          <li v-for="(item, index) in even(lists)" :key="index">{{ item }}</li>
+        </ul>
+      </div>
+      <hr />
+
+      <h3>在 v-for 里使用值范围</h3>
+      <div>
+        <span v-for="(n, index) in 10" :key="index">{{ n + ' ' }}</span>
+      </div>
+      <hr />
+
+      <h3>在 &lt;template&gt; 上使用 v-for</h3>
+      <div>
+        <ul>
+          <template v-for="(item, index) in object">
+            <li :key="index">{{ item }}</li>
+          </template>
+        </ul>
+      </div>
+      <hr />
+
+      <h3>v-for 与 v-if 一同使用</h3>
+      <!-- 注意我们不推荐在同一元素上使用 v-if 和 v-for -->
+      <!-- 当它们处于同一节点，v-for 的优先级比 v-if 更高，这意味着 v-if 将分别重复运行于每个 v-for 循环中 -->
+      <div>
+        <ul>
+          <li v-for="(todo, index) in todos" :key="index" v-if="!todo.isComplete">{{ todo.name }}</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <template v-if="todos.length">
+            <li v-for="(todo, index) in todos" :key="index">{{ todo.name }}</li>
+          </template>
+        </ul>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            userProfile: {
+              name: 'Anika'
+            },
+            numbers: [1, 2, 3, 4, 5],
+            lists: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            object: {
+              title: 'How to do lists in Vue',
+              author: 'Jane Doe',
+              publishedAt: '2016-04-10'
+            },
+            todos: [
+              { name: '学习 JavaScript', isComplete: true },
+              { name: '学习 Vue', isComplete: false },
+              { name: '整个牛项目', isComplete: false }
+            ]
+          }
+        },
+        computed: {
+          evenNumbers() {
+            return this.numbers.filter((number) => {
+              return number % 2 === 0
+            })
+          }
+        },
+        methods: {
+          addOne() {
+            this.$set(this.userProfile, 'age', 27)
+          },
+          addMore() {
+            this.userProfile = Object.assign({}, this.userProfile, {
+              sex: 'Fmale',
+              favoriteColor: 'Vue Green'
+            })
+          },
+          replaceNumber() {
+            this.numbers = this.evenNumbers
+          },
+          even(lists) {
+            return lists.filter((list) => {
+              return list % 2 === 0
+            })
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>
