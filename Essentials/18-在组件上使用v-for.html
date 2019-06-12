@@ -15,12 +15,12 @@
         <button>Add</button>
       </form>
       <ul>
-        <li is="todo-item" v-for="(todo, index) in todos" :key="todo.id" :title="todo.title" @remove="todos.splice(index,1)"></li>
+        <li is="todo-item" v-for="(todo, index) in todos" :key="index" :title="todo.title" @remove="todos.splice(index,1)"></li>
       </ul>
     </div>
     <script>
       Vue.component('todo-item', {
-        props: { title: { type: String, default: '' } },
+        props: { title: { type: String, default() {} } },
         template: `
           <li>
             {{title}}
@@ -31,7 +31,6 @@
       new Vue({
         data() {
           return {
-            newTodoText: '',
             todos: [
               {
                 id: 1,
@@ -46,7 +45,25 @@
                 title: 'Mow the lawn'
               }
             ],
-            nextToId: 4
+            newTodoText: ''
+          }
+        },
+        computed: {
+          nextTodoId() {
+            if (this.todos.length === 0) {
+              return 1
+            }
+            return this.todos[this.todos.length - 1].id + 1
+          }
+        },
+        methods: {
+          addNewTodo() {
+            this.todos.push({
+              id: this.nextTodoId,
+              title: this.newTodoText
+            })
+            this.newTodoText = ''
+            console.log(this.todos)
           }
         }
       }).$mount('#app')

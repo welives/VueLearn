@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>监听子组件事件</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>监听子组件事件</h3>
+      <div :style="{fontSize:postFontSize+'em'}">
+        <blog-post v-for="(post, index) in posts" :key="index" :post="post" @enlarge-text="postFontSize+=0.1"></blog-post>
+      </div>
+      <hr />
+
+      <h3>使用事件抛出一个值</h3>
+      <div :style="{fontSize:postFontSize+'em'}">
+        <blog-post v-for="(post, index) in posts" :key="index" :post="post" @enlarge-text="onEnlarge"></blog-post>
+      </div>
+      <hr />
+
+      <h3>在组件上使用 v-model</h3>
+      <div>
+        searchText: <input type="text" v-model="searchText" />
+        <p>searchText is : {{ searchText }}</p>
+      </div>
+      <br />
+      <div>
+        <code>&lt;input v-model="searchText"/&gt;</code>
+        <p>等价于</p>
+        <code>&lt;input v-bind:value="searchText" v-on:input="searchText = $event.target.value"/&gt;</code>
+      </div>
+      <br />
+      <div>
+        searchText: <input type="text" :value="searchText" @input="searchText=$event.target.value" />
+        <p>searchText is : {{ searchText }}</p>
+      </div>
+      <br />
+      <custom-input v-model="searchText"></custom-input>
+    </div>
+    <script>
+      Vue.component('blog-post', {
+        props: { post: { type: Object, default() {} } },
+        template: `
+          <div class="blog-post">
+            <h3>{{ post.title }}</h3>
+            <button @click="$emit('enlarge-text', 0.1)">Enlarge Text</button>
+            <div v-html="post.content"></div>
+          </div>
+        `
+      })
+      Vue.component('custom-input', {
+        props: { value: { type: String, default() {} } },
+        template: `
+          <div>
+            searchText: <input type="text" :value="value" @input="$emit('input', $event.target.value)">
+            <p>searchText is : {{value}}</p>
+          </div>
+        `
+      })
+      new Vue({
+        data() {
+          return {
+            posts: [
+              { id: 1, title: 'My journey with Vue', content: 'test content' },
+              { id: 2, title: 'Blogging with Vue', content: 'test content' },
+              { id: 3, title: 'Why Vue is so fun', content: 'test content' }
+            ],
+            postFontSize: 1,
+            searchText: ''
+          }
+        },
+        methods: {
+          onEnlarge(sizeAmount) {
+            this.postFontSize += sizeAmount
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

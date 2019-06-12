@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>监听事件</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>监听事件</h3>
+      <button @click="counter++">Add 1</button>
+      <p>上面的按钮已被点击 {{ counter }} 次.</p>
+      <hr />
+
+      <h3>事件处理方法</h3>
+      <button @click="greet($event)">Greet</button>
+      <hr />
+
+      <h3>内联处理器中的方法</h3>
+      <button @click="say('hi')">Say hi</button>
+      <button @click="say('what')">Say what</button>
+      <button @click="warn('Form cannot be submitted yet.', $event)">
+        Submit
+      </button>
+      <hr />
+
+      <h3>事件修饰符</h3>
+      <div>
+        <!-- 阻止单击事件继续传播 -->
+        <a href="18-在组件上使用v-for.html" @click.stop="doThis">18-在组件上使用v-for</a>
+
+        <!-- 提交事件不再重载页面 -->
+        <form @submit.prevent="doThis"><button>Submit</button></form>
+
+        <!-- 修饰符可以串联 -->
+        <a @click.stop.prevent="doThis" href="17-对象变更检测注意事项.html">17-对象变更检测注意事项</a>
+
+        <!-- 只有修饰符 -->
+        <form @submit.prevent><button>Submit</button></form>
+
+        <!-- 添加事件监听器时使用事件捕获模式 -->
+        <!-- 即元素自身触发的事件先在此处理，然后才交由内部元素进行处理 -->
+        <div @click.capture="doThis">capture</div>
+
+        <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+        <!-- 即事件不是从内部元素触发的 -->
+        <div @click.self="doThis">self</div>
+
+        <!-- 点击事件将只会触发一次 -->
+        <a @click.once="doThis" href="16-数组更新检测.html">16-数组更新检测</a>
+
+        <!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发 -->
+        <!-- 而不会等待 `onScroll` 完成  -->
+        <!-- 这其中包含 `event.preventDefault()` 的情况 -->
+        <div @scroll.passive="onScroll">passive</div>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            counter: 0,
+            name: 'Vue.js'
+          }
+        },
+        methods: {
+          greet(e) {
+            console.log(e)
+            alert('hello' + this.name)
+          },
+          say(msg) {
+            alert(msg)
+          },
+          warn(msg, e) {
+            if (e) {
+              e.preventDefault()
+            }
+            alert(msg)
+          },
+          doThis() {}
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

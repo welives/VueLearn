@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>按键修饰符</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>按键修饰符</h3>
+      <!-- 只有在 `key` 是 `Enter` 时调用 `vm.onSubmit()` -->
+      <p>onSubmit: <input @keyup.enter="onKey" /></p>
+      <p>onPageDown: <input @keyup.page-down="onKey" /></p>
+      <hr />
+
+      <h3>系统修饰键</h3>
+      <p><input @keyup.alt.c="onKey" /></p>
+      <div @click.ctrl="onKey">Do something</div>
+
+      <!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
+      <button @click.ctrl="onClick">Ctrl</button>
+
+      <!-- 有且只有 Ctrl 被按下的时候才触发 -->
+      <button @click.ctrl.exact="onClick">Only Ctrl</button>
+
+      <!-- 没有任何系统修饰符被按下的时候才触发 -->
+      <button @click.exact="onClick">Not</button>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {}
+        },
+        methods: {
+          onKey(e) {
+            console.log(e.code)
+          },
+          onClick(e) {
+            console.log(e)
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>
