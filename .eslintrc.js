@@ -27,6 +27,7 @@ module.exports = {
       }
     ],
     'vue/require-default-prop': 'off',
+    'vue/require-prop-types': 'off',
     'vue/attribute-hyphenation': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'vue/multiline-html-element-content-newline': 'off',
