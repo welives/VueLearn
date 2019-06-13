@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Prop</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>Prop 的大小写</h3>
+      <blog-post post-title="Hello World"></blog-post>
+      <hr />
+
+      <h3>传递静态或动态 Prop</h3>
+      <blog-test :test="test"></blog-test>
+    </div>
+    <script>
+      Vue.component('blog-post', {
+        props: { postTitle: { type: String, default() {} } },
+        template: `
+          <div>
+            <h3>{{ postTitle }}</h3>
+          </div>
+        `
+      })
+      Vue.component('blog-test', {
+        props: { test: { type: Object, default() {} } },
+        template: `
+          <div>
+            <p>ID: {{ test.id }}</p>
+            <p>Author: {{ test.id }}</p>
+          </div>
+        `
+      })
+      new Vue({
+        data() {
+          return {
+            test: {
+              id: 1,
+              title: 'My Journey with Vue'
+            }
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

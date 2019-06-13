@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>单向数据流</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <prop-test initial-counter="1" size="10"></prop-test>
+    </div>
+    <script>
+      Vue.component('prop-test', {
+        props: { initialCounter: { type: String, default() {} }, size: { type: String, default() {} } },
+        data() {
+          return {
+            counter: parseInt(this.initialCounter) + 2
+          }
+        },
+        computed: {
+          normalizedSize() {
+            return parseInt(this.size) * 2
+          }
+        },
+        template: `
+          <div>
+            <p>initialCounter: {{ initialCounter }}</p>
+            <p>Counter: {{ counter }} <button @click="counter=counter+2">Counter</button></p>
+            <p>Size: {{ size }}</p>
+            <p>normalizedSize: {{ normalizedSize }}</p>
+          </div>
+        `
+      })
+      new Vue({
+        data() {
+          return {}
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

@@ -27,10 +27,11 @@
         <p>searchText is : {{ searchText }}</p>
       </div>
       <br />
+
       <div>
         <code>&lt;input v-model="searchText"/&gt;</code>
         <p>等价于</p>
-        <code>&lt;input v-bind:value="searchText" v-on:input="searchText = $event.target.value"/&gt;</code>
+        <code>&lt;input v-bind:value="searchText" @input="searchText = $event.target.value"/&gt;</code>
       </div>
       <br />
       <div>
@@ -38,6 +39,7 @@
         <p>searchText is : {{ searchText }}</p>
       </div>
       <br />
+
       <custom-input v-model="searchText"></custom-input>
     </div>
     <script>
