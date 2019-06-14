@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>插槽</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>插槽内容</h3>
+      <div>
+        <navigation-link url="/profile">Your Profile</navigation-link>
+      </div>
+      <hr />
+
+      <!-- 父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的 -->
+      <h3>编译作用域</h3>
+      <div>
+        <navigation-link url="/area">Clicking here will send you to: {{ url }}</navigation-link>
+      </div>
+      <hr />
+
+      <h3>后备内容</h3>
+      <div>
+        <navigation-link url="/content"></navigation-link>
+      </div>
+      <hr />
+
+      <h3>具名插槽</h3>
+      <base-layout>
+        <template v-slot:header>
+          <h1>Here might be a page title</h1>
+        </template>
+        <p>A paragraph for the main content.</p>
+        <p>And another one.</p>
+        <template v-slot:footer>
+          <p>Here's some contact info</p>
+        </template>
+      </base-layout>
+      <hr />
+
+      <h3>作用域插槽</h3>
+      <div>
+        <current-user>
+          <template v-slot="slotProps">
+            {{ slotProps.user.firstName }}
+          </template>
+        </current-user>
+      </div>
+      <hr />
+
+      <h3>独占默认插槽的缩写语法</h3>
+      <!-- 只要出现多个插槽，请始终为所有的插槽使用完整的基于 <template> 的语法 -->
+      <div>
+        <current-user v-slot="slotProps">
+          {{ slotProps.user.firstName }}
+        </current-user>
+      </div>
+      <hr />
+
+      <h3>解构插槽 Prop</h3>
+      <div>
+        <current-user v-slot="{ user }">
+          {{ user.firstName }}
+        </current-user>
+      </div>
+    </div>
+    <script>
+      Vue.component('navigation-link', {
+        props: ['url'],
+        template: `
+          <div>
+            <a :href="url" calss="nav-link"><slot>后备内容</slot></a>
+          </div>
+        `
+      })
+      Vue.component('base-layout', {
+        template: `
+          <div class="container">
+            <header>
+              <slot name="header"></slot>
+            </header>
+            <main>
+              <slot></slot>
+            </main>
+            <footer>
+              <slot name="footer"></slot>
+            </footer>
+          </div>
+        `
+      })
+      Vue.component('current-user', {
+        data() {
+          return {
+            user: {
+              firstName: 'Alan',
+              lastName: 'Worker'
+            }
+          }
+        },
+        // 绑定在 <slot> 元素上的特性被称为插槽 prop
+        template: `
+          <span>
+            <slot :user="user">{{ user.lastName }}</slot>
+          </span>
+        `
+      })
+      new Vue({
+        data() {
+          return {
+            url: 'test'
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

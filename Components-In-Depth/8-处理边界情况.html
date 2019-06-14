@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>处理边界情况</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>访问元素 & 组件</h3>
+      <p>Parent: {{ foo }}</p>
+      <child-test></child-test>
+      <hr />
+
+      <h3>访问父级组件实例</h3>
+      <base-input ref="username" v-model="username">username</base-input>
+    </div>
+    <script>
+      Vue.component('child-test', {
+        data() {
+          return {
+            childFoo: this.$root.foo,
+            childBar: this.$root.bar,
+            childBaz: this.$root.baz()
+          }
+        },
+        methods: {
+          changeParentFoo() {
+            this.$root.foo++
+          },
+          changeChildFoo() {
+            this.childFoo++
+          }
+        },
+        template: `
+          <div>
+            <p>{{childFoo}}</p>
+            <p>{{childBar}}</p>
+            <p>{{childBaz}}</p>
+            <button @click="changeParentFoo">changeParentFoo</button>
+            <button @click="changeChildFoo">changeChildFoo</button>
+          </div>
+        `
+      })
+      Vue.component('base-input', {
+        props: ['value'],
+        methods: {
+          baseInput(e) {
+            this.$emit('input', e.target.value)
+          }
+        },
+        template: `
+          <div>
+            <label>
+              <slot></slot>
+              <input type="text" :value="value" @change="baseInput">
+              <p>username is: {{value}}</p>
+            </label>
+          </div>
+        `
+      })
+      new Vue({
+        data() {
+          return {
+            foo: 1,
+            username: ''
+          }
+        },
+        computed: {
+          bar() {
+            return 'bar'
+          }
+        },
+        methods: {
+          baz() {
+            return 'baz'
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

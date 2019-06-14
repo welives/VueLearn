@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>动态插槽名</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>动态插槽名</h3>
+      <base-layout>
+        <template v-slot:[dynamicslotname]>
+          <h1>Here might be a page title</h1>
+        </template>
+        <p>A paragraph for the main content.</p>
+        <p>And another one.</p>
+        <template v-slot:footer>
+          <p>Here's some contact info</p>
+        </template>
+      </base-layout>
+      <hr />
+
+      <h3>具名插槽的缩写</h3>
+      <base-layout>
+        <template #[dynamicslotname]>
+          <h1>Here might be a page title</h1>
+        </template>
+        <template #default>
+          <p>A paragraph for the main content.</p>
+          <p>And another one.</p>
+        </template>
+        <template #footer>
+          <p>Here's some contact info</p>
+        </template>
+      </base-layout>
+      <hr />
+    </div>
+    <script>
+      Vue.component('base-layout', {
+        template: `
+          <div class="container">
+            <header>
+              <slot name="header"></slot>
+            </header>
+            <main>
+              <slot></slot>
+            </main>
+            <footer>
+              <slot name="footer"></slot>
+            </footer>
+          </div>
+        `
+      })
+      new Vue({
+        data() {
+          return {
+            dynamicslotname: 'header'
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>
