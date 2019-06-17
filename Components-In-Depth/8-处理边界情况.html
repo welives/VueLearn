@@ -9,12 +9,12 @@
   </head>
   <body>
     <div id="app">
-      <h3>访问元素 & 组件</h3>
+      <h3>访问根实例</h3>
       <p>Parent: {{ foo }}</p>
       <child-test></child-test>
       <hr />
 
-      <h3>访问父级组件实例</h3>
+      <h3>访问子组件实例或子元素</h3>
       <base-input ref="username" v-model="username">username</base-input>
     </div>
     <script>
@@ -49,13 +49,16 @@
         methods: {
           baseInput(e) {
             this.$emit('input', e.target.value)
+          },
+          focus() {
+            this.$refs.input.focus()
           }
         },
         template: `
           <div>
             <label>
               <slot></slot>
-              <input type="text" :value="value" @change="baseInput">
+              <input type="text" ref="input" :value="value" @change="baseInput">
               <p>username is: {{value}}</p>
             </label>
           </div>
@@ -72,6 +75,9 @@
           bar() {
             return 'bar'
           }
+        },
+        mounted() {
+          this.$refs.username.focus()
         },
         methods: {
           baz() {
