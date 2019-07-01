@@ -10,10 +10,12 @@
 
   <body>
     <div id="app">
-      <p @click="hideMe" v-if="seen">现在你看到我了</p>
+      <button @click="hideMe">显示/隐藏</button>
+      <p v-if="seen">现在你看到我了</p>
       <ol>
-        <li v-for="(item, index) in items" :key="index" @click="addItem">{{ item.name }}</li>
+        <li v-for="(item, index) in items" :key="index">{{ item.name }}</li>
       </ol>
+      <button @click="addItem">新增项目</button>
     </div>
     <script>
       new Vue({
