@@ -27,11 +27,13 @@
       <h3>复选框</h3>
       <div>
         <!-- 单个复选框，绑定到布尔值 -->
+        <p>单个复选框</p>
         <input type="checkbox" id="checkbox" v-model="checked" />
         <label for="checkbox">{{ checked }}</label>
       </div>
       <div>
         <!-- 多个复选框，绑定到同一个数组 -->
+        <p>多个复选框</p>
         <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
         <label for="jack">Jack</label>
         <input type="checkbox" id="john" value="John" v-model="checkedNames" />
@@ -56,6 +58,7 @@
       <h3>选择框</h3>
       <!-- 单选时 -->
       <div>
+        <p>单选时</p>
         <select v-model="selected1">
           <option disabled value="">请选择</option>
           <option>A</option>
@@ -67,6 +70,7 @@
       <br />
       <!-- 多选时,绑定到同一个数组 -->
       <div>
+        <p>多选时</p>
         <select v-model="selected2" multiple style="width: 50px;">
           <option>A</option>
           <option>B</option>
@@ -78,9 +82,10 @@
       <br />
       <!-- 用 v-for 渲染的动态选项 -->
       <div>
+        <p>动态选项</p>
         <select v-model="selected3">
           <option disabled value="">请选择</option>
-          <option v-for="option in options" v-bind:value="option.value">
+          <option v-for="option in options" :value="option.value">
             {{ option.text }}
           </option>
         </select>

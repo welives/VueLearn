@@ -68,6 +68,7 @@
       new Vue({
         data() {
           return {
+            // 由于 JavaScript 的限制，Vue 不能检测对象属性的添加或删除
             userProfile: {
               name: 'Anika'
             },
@@ -94,9 +95,11 @@
         },
         methods: {
           addOne() {
+            // Vue.set(this.userProfile, 'age', 27)
             this.$set(this.userProfile, 'age', 27)
           },
           addMore() {
+            // 应该用两个对象的属性创建一个新的对象
             this.userProfile = Object.assign({}, this.userProfile, {
               sex: 'Fmale',
               favoriteColor: 'Vue Green'

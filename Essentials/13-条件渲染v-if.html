@@ -10,6 +10,7 @@
   <body>
     <div id="app">
       <h3>在&lt;template&gt;元素上使用-v-if-条件渲染分组</h3>
+      <button @click="toggleOK">toggleOK</button>
       <template v-if="ok">
         <h1>Title</h1>
         <p>Paragraph 1</p>
@@ -65,7 +66,7 @@
         },
         computed: {
           key() {
-            return this.loginType !== undefined ? this.loginType + +new Date() : this.loginType + +new Date()
+            return this.loginType + +new Date()
           }
         },
         methods: {
@@ -75,6 +76,9 @@
             } else {
               this.loginType = 'username'
             }
+          },
+          toggleOK() {
+            this.ok = !this.ok
           }
         }
       }).$mount('#app')

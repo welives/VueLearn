@@ -51,10 +51,11 @@
             })
           },
           setValue1() {
-            this.tests[1] = 'x'
+            this.tests[1] = 'x' // 不是响应性的
             console.log(this.tests)
           },
           setValue2() {
+            // Vue.set(this.tests, 1, 'x')
             this.$set(this.tests, 1, 'x')
             console.log(this.tests)
           },
@@ -63,7 +64,7 @@
             console.log(this.tests)
           },
           changeLength1() {
-            this.tests.length = 2
+            this.tests.length = 2 // 不是响应性的
             console.log(this.tests)
           },
           changeLength2() {

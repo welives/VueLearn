@@ -16,8 +16,12 @@
       <hr />
 
       <h3>使用事件抛出一个值</h3>
-      <div :style="{fontSize:postFontSize+'em'}">
-        <blog-post v-for="(post, index) in posts" :key="index" :post="post" @enlarge-text="onEnlarge"></blog-post>
+      <div :style="{fontSize:otherPostFontSize+'em'}">
+        <other-blog-post v-for="(post, index) in posts" :key="index" :post="post" @enlarge-text="onEnlarge"></other-blog-post>
+      </div>
+      <h3>可以通过 $event 访问到被抛出的这个值</h3>
+      <div :style="{fontSize:otherPostFontSize+'em'}">
+        <ther-blog-post v-for="(post, index) in posts" :key="index" :post="post" @enlarge-text="otherPostFontSize+=$event"></ther-blog-post>
       </div>
       <hr />
 
@@ -26,27 +30,37 @@
         searchText: <input type="text" v-model="searchText" />
         <p>searchText is : {{ searchText }}</p>
       </div>
-      <br />
+      <hr />
 
       <div>
         <code>&lt;input v-model="searchText"/&gt;</code>
         <p>等价于</p>
-        <code>&lt;input v-bind:value="searchText" @input="searchText = $event.target.value"/&gt;</code>
+        <code>&lt;input v-bind:value="searchText" @input="searchText=$event.target.value"/&gt;</code>
       </div>
       <br />
       <div>
         searchText: <input type="text" :value="searchText" @input="searchText=$event.target.value" />
         <p>searchText is : {{ searchText }}</p>
       </div>
-      <br />
+      <hr />
 
       <custom-input v-model="searchText"></custom-input>
     </div>
     <script>
       Vue.component('blog-post', {
-        props: { post: { type: Object, default() {} } },
+        props: { post: { type: Object } },
         template: `
           <div class="blog-post">
+            <h3>{{ post.title }}</h3>
+            <button @click="$emit('enlarge-text')">Enlarge Text</button>
+            <div v-html="post.content"></div>
+          </div>
+        `
+      })
+      Vue.component('other-blog-post', {
+        props: { post: { type: Object } },
+        template: `
+          <div class="other-blog-post">
             <h3>{{ post.title }}</h3>
             <button @click="$emit('enlarge-text', 0.1)">Enlarge Text</button>
             <div v-html="post.content"></div>
@@ -54,7 +68,7 @@
         `
       })
       Vue.component('custom-input', {
-        props: { value: { type: String, default() {} } },
+        props: { value: { type: String } },
         template: `
           <div>
             searchText: <input type="text" :value="value" @input="$emit('input', $event.target.value)">
@@ -71,12 +85,13 @@
               { id: 3, title: 'Why Vue is so fun', content: 'test content' }
             ],
             postFontSize: 1,
+            otherPostFontSize: 1,
             searchText: ''
           }
         },
         methods: {
           onEnlarge(sizeAmount) {
-            this.postFontSize += sizeAmount
+            this.otherPostFontSize += sizeAmount
           }
         }
       }).$mount('#app')

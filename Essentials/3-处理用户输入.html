@@ -12,6 +12,7 @@
     <div id="app">
       <p>{{ message }}</p>
       <button @click="reverseMsg">逆转消息</button>
+      <!-- ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上 -->
       <input type="text" ref="testRef" v-model="message" @click="testRef" />
     </div>
     <script>

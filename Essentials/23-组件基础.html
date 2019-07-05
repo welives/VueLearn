@@ -33,11 +33,10 @@
         template: '<button @click="count++">You clicked me {{ count }} times.</button>'
       })
       Vue.component('blog-post', {
-        props: { post: { type: Object, default() {} } },
+        props: { post: { type: Object } },
         template: `
           <div class="blog-post">
             <h3>{{ post.title }}</h3>
-            <div v-html="post.content"></div>
           </div>
         `
       })

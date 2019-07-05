@@ -21,6 +21,7 @@
     <script>
       Vue.component('todo-item', { template: `<li>这是个待办项</li>` })
       Vue.component('prop-item', {
+        // 模板中声明了使用todo作为props
         props: { todo: { type: Object } },
         template: `<li>{{todo.text}}</li>`
       })
