@@ -16,7 +16,7 @@
 
       <h3>将原生事件绑定到组件</h3>
       <base-input v-model="inputVue" label="inputVue"></base-input>
-      <p>{{ inputVue }}</p>
+      <p>inputVue: {{ inputVue }}</p>
     </div>
     <script>
       Vue.component('base-checkbox', {
@@ -25,7 +25,7 @@
           event: 'change'
         },
         props: {
-          checked: Boolean
+          checked: { type: Boolean }
         },
         template: `
           <div>
@@ -59,7 +59,7 @@
           <div>
             <label>
               {{ label }}
-              <input type="text" v-bind="$attrs" :value="value" v-on="inputListeners">
+              <input type="text" :value="value" v-on="inputListeners">
             </label>
           </div>
         `

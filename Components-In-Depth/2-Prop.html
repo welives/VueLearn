@@ -18,7 +18,7 @@
     </div>
     <script>
       Vue.component('blog-post', {
-        props: { postTitle: { type: String, default() {} } },
+        props: { postTitle: { type: String } },
         template: `
           <div>
             <h3>{{ postTitle }}</h3>
@@ -26,11 +26,11 @@
         `
       })
       Vue.component('blog-test', {
-        props: { test: { type: Object, default() {} } },
+        props: { test: { type: Object } },
         template: `
           <div>
             <p>ID: {{ test.id }}</p>
-            <p>Author: {{ test.id }}</p>
+            <p>Author: {{ test.title }}</p>
           </div>
         `
       })

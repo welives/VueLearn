@@ -10,7 +10,7 @@
   <body>
     <div id="app">
       <h3>访问根实例</h3>
-      <p>Parent: {{ foo }}</p>
+      <p>ParentFoo: {{ foo }}</p>
       <child-test></child-test>
       <hr />
 
@@ -36,9 +36,9 @@
         },
         template: `
           <div>
-            <p>{{childFoo}}</p>
-            <p>{{childBar}}</p>
-            <p>{{childBaz}}</p>
+            <p>childFoo: {{childFoo}}</p>
+            <p>childBar: {{childBar}}</p>
+            <p>childBaz: {{childBaz}}</p>
             <button @click="changeParentFoo">changeParentFoo</button>
             <button @click="changeChildFoo">changeChildFoo</button>
           </div>

@@ -13,7 +13,7 @@
     </div>
     <script>
       Vue.component('prop-test', {
-        props: { initialCounter: { type: String, default() {} }, size: { type: String, default() {} } },
+        props: { initialCounter: { type: String }, size: { type: String } },
         data() {
           return {
             counter: parseInt(this.initialCounter) + 2

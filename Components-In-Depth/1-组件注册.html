@@ -9,25 +9,21 @@
   </head>
   <body>
     <div id="app">
+      <!-- 一个组件上的 v-model 默认会利用名为 value 的 prop 和名为 input 的事件 -->
       <base-input v-model="searchText">searchText: </base-input>
     </div>
     <script>
       const BaseInput = {
-        props: { value: { type: String, default() {} } },
+        props: { value: { type: String } },
         template: `
           <div>
             <label>
               <slot></slot>
-              <input type="text" :value="value" @change="baseInput">
+              <input type="text" :value="value" @input="$emit('input', $event.target.value)">
               <p>searchText is: {{value}}</p>
             </label>
           </div>
-        `,
-        methods: {
-          baseInput(e) {
-            this.$emit('input', e.target.value)
-          }
-        }
+        `
       }
       new Vue({
         components: {
