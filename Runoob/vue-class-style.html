@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue.js 样式绑定</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <h1>Vue.js class</h1>
+        <p>
+          class 与 style 是 HTML 元素的属性，用于设置元素的样式，我们可以用 v-bind 来设置样式属性。<br />
+          Vue.js v-bind 在处理 class 和 style 时， 专门增强了它。表达式的结果类型除了字符串之外，还可以是对象或数组。
+        </p>
+      </div>
+      <hr />
+      <div>
+        <h1>class 属性绑定</h1>
+        <p>我们可以为 v-bind:class 设置一个对象，从而动态的切换 class</p>
+        <div v-bind:class="{active:isActive}"></div>
+      </div>
+      <hr />
+      <div>
+        <p>此外，我们也可以在这里绑定返回对象的计算属性。这是一个常用且强大的模式</p>
+        <div :class="classObject"></div>
+      </div>
+      <hr />
+      <div>
+        <h1>数组语法</h1>
+        <p>我们可以把一个数组传给 v-bind:class</p>
+        <div :class="[activeClass, errorClass]"></div>
+      </div>
+      <hr />
+      <div>
+        我们还可以使用三元表达式来切换列表中的 class <br />
+        <div :class="['base', isActive ? activeClass : '']"></div>
+      </div>
+      <hr />
+      <div>
+        <h1>Vue.js style(内联样式)</h1>
+        <p>我们可以在 v-bind:style 直接设置样式</p>
+        <div :style="{color:activeColor, fontSize: fontSize + 'px'}">菜鸟教程</div>
+      </div>
+      <hr />
+      <div>
+        <p>也可以直接绑定到一个样式对象，让模板更清晰</p>
+        <div :style="styleObject">菜鸟教程</div>
+      </div>
+      <hr />
+      <div>
+        <p>v-bind:style 可以使用数组将多个样式对象应用到一个元素上</p>
+        <div :style="[baseStyles, overridingStyles]">菜鸟教程</div>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            isActive: true,
+            error: {
+              value: true,
+              type: 'fatal'
+            },
+            activeClass: 'active',
+            errorClass: 'text-danger',
+            activeColor: 'blue',
+            fontSize: 30,
+            styleObject: {
+              color: 'pink',
+              fontSize: '40px'
+            },
+            baseStyles: {
+              color: 'green',
+              fontSize: '30px'
+            },
+            overridingStyles: {
+              'font-weight': 'bold'
+            }
+          }
+        },
+        computed: {
+          classObject() {
+            return {
+              "base": true,
+              "active": this.isActive && !this.error.value,
+              'text-danger': this.error.value && this.error.type === 'fatal'
+            }
+          }
+        }
+      }).$mount('#app')
+    </script>
+    <style lang="scss" scoped>
+      .base {
+        width: 10px;
+        height: 10px;
+      }
+      .active {
+        width: 30px;
+        height: 30px;
+        background: #00ff00;
+      }
+      .text-danger {
+        background: #f00;
+      }
+    </style>
+  </body>
+</html>

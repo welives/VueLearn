@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue.js 条件语句</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>条件判断</h1>
+      <p v-if="seen">条件判断使用 v-if 指令：</p>
+      <input type="checkbox" v-model="seen" />
+      <hr />
+      <div>
+        可以用 v-else 指令给 v-if 添加一个 "else" 块：
+        <p v-if="Math.random() > 0.5">Sorry</p>
+        <p v-else>Not Sorry</p>
+      </div>
+      <hr />
+      <div>
+        v-else-if 在 2.1.0 新增，顾名思义，用作 v-if 的 else-if 块。可以链式的多次使用：<br />
+        <p v-if="type === 'A'">A</p>
+        <p v-else-if="type === 'B'">B</p>
+        <p v-else-if="type === 'C'">C</p>
+        <p v-else>Not A/B/C</p>
+      </div>
+      <hr />
+      <div>
+        我们也可以使用 v-show 指令来根据条件展示元素：<br />
+        <p v-show="ok">Hello!</p>
+        <input type="checkbox" v-model="ok" />
+      </div>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            seen: true,
+            type: 'C',
+            ok: false
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

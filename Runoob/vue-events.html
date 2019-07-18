@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue.js 事件处理器</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <p>事件监听可以使用 v-on 指令</p>
+        <button v-on:click="counter += 1">增加 1</button>
+        <p>这个按钮被点击了 {{ counter }}</p>
+      </div>
+      <hr />
+      <div>
+        <p>
+          通常情况下，我们需要使用一个方法来调用 JavaScript 方法。<br />
+          v-on 可以接收一个定义的方法来调用。
+        </p>
+        <!-- `greet` 是在下面定义的方法名 -->
+        <button @click="greet">Greet</button>
+      </div>
+      <hr />
+      <div>
+        <p>除了直接绑定到一个方法，也可以用内联 JavaScript 语句</p>
+        <button @click="say('hi')">Say hi</button>
+        <button @click="say('what')">Say what</button>
+      </div>
+      <hr />
+      <div>
+        <h1>事件修饰符</h1>
+        <p>
+          Vue.js 为 v-on 提供了事件修饰符来处理 DOM 事件细节，如：event.preventDefault() 或 event.stopPropagation()。<br />
+          Vue.js通过由点(.)表示的指令后缀来调用修饰符。
+        </p>
+      </div>
+      <hr />
+      <div>
+        <h1>按键修饰符</h1>
+        <p>Vue 允许为 v-on 在监听键盘事件时添加按键修饰符</p>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            counter: 0,
+            name: 'Vue.js'
+          }
+        },
+        // 在 `methods` 对象中定义方法
+        methods: {
+          greet(e) {
+            // `this` 在方法里指当前 Vue 实例
+            alert('Hello ' + this.name + '!')
+            // `e` 是原生 DOM 事件
+            if (e) {
+              alert(e.target.tagName)
+            }
+          },
+          say(msg) {
+            alert(msg)
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

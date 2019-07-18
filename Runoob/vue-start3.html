@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue.js起步</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>site: {{ site }}</h1>
+      <h1>url: {{ url }}</h1>
+      <h1>Alexa: {{ alexa }}</h1>
+    </div>
+    <script>
+      // 我们的数据对象
+      const data = { site: '菜鸟教程', url: 'www.runoob.com', alexa: '10000' }
+      const vm = new Vue({
+        data: data
+      }).$mount('#app')
+
+      document.write(vm.$data === data)
+      document.write('<br>')
+      document.write(vm.$el === document.querySelector('#app'))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue.js 响应接口</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <p>
+          Vue 可以添加数据动态响应接口。<br />
+          例如以下实例，我们通过使用 $watch 属性来实现数据的监听，$watch 必须添加在 Vue 实例之外才能实现正确的响应。
+        </p>
+        <p style="font-size:25px">计数器: {{ counter }}</p>
+        <button @click="counter++" style="font-size:25px">点我</button>
+      </div>
+      <hr />
+      <div>
+        <p>
+          Vue 不允许在已经创建的实例上动态添加新的根级响应式属性。<br />
+          Vue 不能检测到对象属性的添加或删除，最好的方式就是在初始化实例前声明根级响应式属性，哪怕只是一个空值。<br />
+          如果我们需要在运行过程中实现属性的添加或删除，则可以使用全局 Vue，Vue.set 和 Vue.delete 方法。
+        </p>
+        <div>
+            <h1>Vue.set</h1>
+            <p>Vue.set 方法用于设置对象的属性，它可以解决 Vue 无法检测添加属性的限制</p>
+            <p>
+              语法格式如下：<br />
+              Vue.set( target, key, value ) <br />
+              参数说明：
+              <ul>
+                <li>target: 可以是对象或数组</li>
+                <li>key : 可以是字符串或数字</li>
+                <li>value: 可以是任何类型</li>
+              </ul>
+            </p>
+            <p style="font-size:25px">计数器: {{ products.id }}</p>
+            <button @click="products.id++" style="font-size:25px">点我</button>
+        </div>
+        <hr>
+        <div>
+          <h1>Vue.delete</h1>
+          <p>
+            Vue.delete 用于删除动态添加的属性 <br>
+            语法格式：<br>
+            Vue.delete( target, key ) <br>
+            参数说明：
+            <ul>
+              <li>target: 可以是对象或数组</li>
+              <li>key : 可以是字符串或数字</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const myproduct = { 'id': 1, 'name': 'book', 'price': '20.00' }
+      const vm = new Vue({
+        data() {
+          return {
+            counter: 1,
+            products: myproduct
+          }
+        },
+        watch: {
+          counter(newVal, oldVal) {
+            // alert('计数器值的变化 :' + oldVal + ' 变为 ' + newVal + '!')
+            console.log('计数器值的变化 :' + oldVal + ' 变为 ' + newVal + '!')
+          }
+        }
+      }).$mount('#app')
+      setTimeout(() => {
+        vm.counter += 20
+      }, 2000)
+
+      vm.products.test = 'test'
+      Vue.set(myproduct, 'qty', 1)
+      
+      Vue.delete(myproduct, 'price')
+      console.log(vm)
+      
+    </script>
+  </body>
+</html>

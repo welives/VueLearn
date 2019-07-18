@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue.js 模板语法</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>插值</h1>
+      <p>数据绑定最常见的形式就是使用 （双大括号）的文本插值：{{ message }}</p>
+      <hr />
+      <p>使用 v-html 指令用于输出 html 代码：<span v-html="html"></span></p>
+      <hr />
+      <div>
+        HTML 属性中的值应使用 v-bind 指令：<br />
+        <label for="r1">修改颜色</label>
+        <input type="checkbox" id="r1" v-model="use" />
+        <p :class="{active:use}">v-bind:class 指令</p>
+      </div>
+      <hr />
+      <div>
+        Vue.js 都提供了完全的 JavaScript 表达式支持。<br />
+        {{ 5 + 5 }} <br />
+        {{ ok ? 'YES' : 'NO' }} <br />
+        {{
+          message
+            .split('')
+            .reverse()
+            .join('')
+        }}
+        <p :id="'list-'+id" v-html="html"></p>
+      </div>
+      <hr />
+      <h1>指令</h1>
+      指令是带有 v- 前缀的特殊属性。指令用于在表达式的值改变时，将某些行为应用到 DOM 上。
+      <p v-if="seen">现在你看到我了</p>
+      <input type="checkbox" v-model="seen" />
+      <hr />
+      <p>
+        参数在指令后以冒号指明。<br />
+        <a v-bind:href="url">菜鸟教程</a>
+      </p>
+      <hr />
+      <div>
+        修饰符是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。
+        <form v-bind:submit.prevent="onSubmit"><button type="submit">submit</button></form>
+      </div>
+      <hr />
+      <h1>用户输入</h1>
+      <p>{{ input }}</p>
+      <input type="text" v-model="input" />
+      <hr />
+      按钮的事件我们可以使用 v-on 监听事件，并对用户的输入进行响应。<br />
+      <button @click="reverseMessage">反转字符串</button>
+      <hr />
+      <h1>过滤器</h1>
+      Vue.js 允许你自定义过滤器，被用作一些常见的文本格式化。由"管道符"指示 <br />
+      {{ test | capitalize }}
+    </div>
+    <script>
+      new Vue({
+        filters: {
+          capitalize(val) {
+            if (!val) {
+              return ''
+            }
+            val = val.toString()
+            return val.charAt(0).toUpperCase() + val.slice(1)
+          }
+        },
+        data() {
+          return {
+            message: 'Hello Vue.js!',
+            html: '<strong>菜鸟教程</strong>',
+            ok: true,
+            use: false,
+            id: 1,
+            seen: true,
+            url: 'http://www.runoob.com',
+            input: 'Runoob!',
+            test: 'test'
+          }
+        },
+        methods: {
+          onSubmit() {},
+          reverseMessage() {
+            this.input = this.input
+              .split('')
+              .reverse()
+              .join('')
+          }
+        }
+      }).$mount('#app')
+    </script>
+    <style lang="scss" scoped>
+      .active {
+        background: #444444;
+        color: #eee;
+      }
+    </style>
+  </body>
+</html>

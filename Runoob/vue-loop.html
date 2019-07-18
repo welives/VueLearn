@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue.js 循环语句</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <h1>循环使用 v-for 指令</h1>
+        v-for 指令需要以 site in sites 形式的特殊语法， sites 是源数据数组并且 site 是数组元素迭代的别名。
+        <ol>
+          <li v-for="(site,index) in sites">{{ site.name }}</li>
+        </ol>
+      </div>
+      <hr />
+      <div>
+        模板中使用 v-for：
+        <ul>
+          <template v-for="(site,index) in sites">
+            <li>{{ site.name }}</li>
+          </template>
+        </ul>
+      </div>
+      <hr />
+      <div>
+        <h1>v-for 迭代对象</h1>
+        v-for 可以通过一个对象的属性来迭代数据 <br />
+        <ul>
+          <li v-for="(value,index) in object">{{ value }}</li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            sites: [{ name: 'Runoob' }, { name: 'Google' }, { name: 'Taobao' }],
+            object: {
+              name: '菜鸟教程',
+              url: 'http://www.runoob.com',
+              slogan: '学的不仅是技术，更是梦想！'
+            }
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue.js 监听属性</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <p>Vue.js 监听属性 watch，我们可以通过 watch 来响应数据的变化。</p>
+        <p style="font-size:25px">计数器: {{ counter }}</p>
+        <button @click="counter++" style="font-size:25px">点我</button>
+      </div>
+      <hr />
+      <div>
+        <p>以下实例进行千米与米之间的换算：</p>
+        千米 : <input type="text" v-model="kilometers" /><br />
+        米 : <input type="text" v-model="meters" />
+        <p class="info"></p>
+      </div>
+    </div>
+    <script>
+      const vm = new Vue({
+        data() {
+          return {
+            counter: 1,
+            kilometers: 0,
+            meters: 0
+          }
+        },
+        watch: {
+          counter(newVal, oldVal) {
+            alert('计数器值的变化 :' + oldVal + ' 变为 ' + newVal + '!')
+          },
+          kilometers(val) {
+            this.kilometers = val
+            this.meters = this.kilometers * 1000
+          },
+          meters(val) {
+            this.meters = val
+            this.kilometers = val / 1000
+          }
+        }
+      }).$mount('#app')
+      // $watch 是一个实例方法
+      vm.$watch('kilometers', (newVal, oldVal) => {
+        // 这个回调将在 vm.kilometers 改变后调用
+        document.querySelector('.info').innerHTML = '修改前值为: ' + oldVal + '，修改后值为: ' + newVal
+      })
+    </script>
+  </body>
+</html>

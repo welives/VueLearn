@@ -184,7 +184,7 @@ module.exports = {
     'computed-property-spacing': 'error', // 强制在计算的属性的方括号中使用一致的空格
     'eol-last': 'error', // 要求或禁止文件末尾存在空行
     'func-call-spacing': 'error', // 要求或禁止在函数标识符和其调用之间有空格
-    'jsx-quotes': [2, 'prefer-single'], // 强制在 JSX 属性中一致地使用双引号或单引号
+    'jsx-quotes': ['error', 'prefer-single'], // 强制在 JSX 属性中一致地使用双引号或单引号
     'key-spacing': [
       'error',
       {
