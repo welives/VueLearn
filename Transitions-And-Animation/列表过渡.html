@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>列表过渡</title>
+    <script src="../vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <p>
+          那么怎么同时渲染整个列表，比如使用 v-for ？在这种场景中，使用 &lt;transition-group&gt;
+          组件。在我们深入例子之前，先了解关于这个组件的几个特点：
+          <ul>
+            <li>不同于 &lt;transition&gt;，它会以一个真实元素呈现：默认为一个 &lt;span&gt;。你也可以通过 tag 特性更换为其他元素。</li>
+            <li>过渡模式不可用，因为我们不再相互切换特有的元素。</li>
+            <li>内部元素 总是需要 提供唯一的 key 属性值。</li>
+          </ul>
+        </p>
+      </div>
+      <hr>
+      <div>
+        <h1>列表的进入/离开过渡</h1>
+        <button @click="add">Add</button>
+        <button @click="remove">Remove</button>
+        <transition-group tag="p" name="list">
+          <span v-for="(item,index) in items1" :key="item" class="list-item">{{item}}</span>
+        </transition-group>
+      </div>
+      <hr>
+      <div>
+        <h1>列表的排序过渡</h1>
+        <p>
+          &lt;transition-group&gt; 组件还有一个特殊之处。不仅可以进入和离开动画，还可以改变定位。<br>
+          要使用这个新功能只需了解新增的 v-move 特性，它会在元素的改变定位的过程中应用。<br>
+          像之前的类名一样，可以通过 name 属性来自定义前缀，也可以通过 move-class 属性手动设置。
+        </p>
+        <button @click="shuffle">Shuffle</button>
+        <transition-group tag="ul" name="flip-list">
+          <li v-for="(item,index) in items2" :key="item">{{item}}</li>
+        </transition-group>
+      </div>
+      <hr>
+      <div>
+        <button @click="shuffle3">Shuffle</button>
+        <button @click="add3">Add</button>
+        <button @click="remove3">Remove</button>
+        <transition-group tag="p" name="list-complete">
+          <span v-for="(item,index) in items3" :key="item" class="list-complete-item">{{item}}</span>
+        </transition-group>
+      </div>
+      <hr>
+      <div>
+        <h1>列表的交错过渡</h1>
+        <p>通过 data 属性与 JavaScript 通信 ，就可以实现列表的交错过渡</p>
+        <input type="text" v-model="query">
+        <transition-group tag="ul" name="staggered-fade" :css="false" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+          <li v-for="(item,index) in computedList" :key="item.msg" :data-index="index">
+            {{item.msg}}
+          </li>
+        </transition-group>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            items1: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            items2: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            items3: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            nextNum: 10,
+            query: '',
+            list: [
+              { msg: 'Bruce Lee' },
+              { msg: 'Jackie Chan' },
+              { msg: 'Chuck Norris' },
+              { msg: 'Jet Li' },
+              { msg: 'Kung Fury' }
+            ]
+          }
+        },
+        computed: {
+          computedList() {
+            const vm = this
+            return this.list.filter((item) => {
+              return item.msg.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+            })
+          }
+        },
+        methods: {
+          randomIndex() {
+            return Math.floor(Math.random() * this.items1.length)
+          },
+          add() {
+            this.items1.splice(this.randomIndex(), 0, this.nextNum++)
+          },
+          remove() {
+            this.items1.splice(this.randomIndex(), 1)
+          },
+          shuffle() {
+            this.items2 = _.shuffle(this.items2)
+          },
+          //
+          randomIndex3() {
+            return Math.floor(Math.random() * this.items3.length)
+          },
+          add3() {
+            this.items3.splice(this.randomIndex3(), 0, this.nextNum++)
+          },
+          remove3() {
+            this.items3.splice(this.randomIndex3(), 1)
+          },
+          shuffle3() {
+            this.items3 = _.shuffle(this.items3)
+          },
+          //
+          beforeEnter(el) {
+            el.style.opacity = 0
+            el.style.height = 0
+          },
+          enter(el, done) {
+            const delay = el.dataset.index * 150
+            setTimeout(() => {
+              Velocity(
+                el,
+                { opacity: 1, height: '1.6em' },
+                { complete: done }
+              )
+            }, delay)
+          },
+          leave(el, done) {
+            const delay = el.dataset.index * 150
+            setTimeout(() => {
+              Velocity(
+                el,
+                { opacity: 0, height: 0 },
+                { complete: done }
+              )
+            }, delay)
+          }
+        }
+      }).$mount('#app')
+    </script>
+    <style lang="scss" scoped>
+    .list-item{
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .list-enter-active,.list-leave-active{
+      transition: all 1s;
+    }
+    .list-enter, .list-leave-to{
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    .flip-list-move{
+      transition: transform 1s;
+    }
+    .list-complete-item{
+      transition: all 1s;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .list-complete-enter, .list-complete-leave-to{
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .list-complete-leave-active{
+      position: absolute;
+    }
+    </style>
+  </body>
+</html>

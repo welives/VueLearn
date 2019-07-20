@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>多个元素的过渡</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <transition name="" mode="">
+        <button :key="isEditing">{{ isEditing ? 'Save' : 'Edit' }}</button>
+      </transition>
+      <hr />
+      <transition name="" mode="">
+        <button :key="docState">{{ buttonMessage }}</button>
+      </transition>
+      <hr />
+      <div>
+        <h1>过渡模式</h1>
+        <transition name="fade" mode="out-in">
+          <button :key="isOn" @click="isOn = !isOn">{{ toggle }}</button>
+        </transition>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            isEditing: true,
+            docState: 'saved',
+            isOn: true
+          }
+        },
+        computed: {
+          buttonMessage() {
+            switch (this.docState) {
+              case 'saved':
+                return 'Edit'
+              case 'edited':
+                return 'Save'
+              case 'editng':
+                return 'Cancel'
+            }
+          },
+          toggle() {
+            if (this.isOn) {
+              return 'on'
+            } else {
+              return 'off'
+            }
+          }
+        }
+      }).$mount('#app')
+    </script>
+    <style lang="scss" scoped>
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.5s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+    </style>
+  </body>
+</html>

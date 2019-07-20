@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>过滤器</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>当全局过滤器和局部过滤器重名时，会采用局部过滤器。</p>
+      <input type="text" v-model="msg" />
+      <p>{{ msg | capitalize }}</p>
+    </div>
+    <script>
+      // 创建 Vue 实例之前全局定义过滤器
+      Vue.filter('capitalize', (value) => {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      })
+      new Vue({
+        // 在一个组件的选项中定义本地的过滤器
+        filters: {
+          capitalize(value) {
+            if (!value) return ''
+            value = value.toString()
+            return value[0].toLowerCase() + value.slice(1).toUpperCase()
+          }
+        },
+        data() {
+          return {
+            msg: ''
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

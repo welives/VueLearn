@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>单元素/组件的过渡</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <h1>单元素/组件的过渡</h1>
+        <p>
+          v-enter-active 表示整个进入的过程 <br />
+          v-leave-active 表示整个离开的过程 <br />
+          其中v-enter和v-leave-to 对应进入/离开的 opacity: 0 (透明) <br />
+          v-enter-to和v-leave 对应进入/离开的 opacity: 1 (不透明)
+        </p>
+        <button @click="show = !show">Toggle</button>
+        <transition name="fade" mode="">
+          <p v-if="show">Hello</p>
+        </transition>
+      </div>
+      <hr />
+      <div>
+        <h1>CSS 过渡</h1>
+        <p>常用的过渡都是使用 CSS 过渡</p>
+        <button @click="css_transition = !css_transition">Toggle render</button>
+        <transition name="slide-fade" mode="">
+          <p v-if="css_transition">Hello</p>
+        </transition>
+      </div>
+      <hr />
+      <div>
+        <h1>CSS 动画</h1>
+        <p>CSS 动画用法同 CSS 过渡，区别是在动画中 v-enter 类名在节点插入 DOM 后不会立即删除，而是在 animationend 事件触发时删除</p>
+        <button @click="css_animation = !css_animation">Toggle show</button>
+        <transition name="bounce" mode="">
+          <p v-if="css_animation">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id.
+            Pellentesque habitant morbi tristique senectus et netus.
+          </p>
+        </transition>
+      </div>
+      <hr />
+      <div>
+        <h1>自定义过渡的类名</h1>
+        <p>
+          我们可以通过以下特性来自定义过渡类名：
+          <ul>
+            <li>enter-class</li>
+            <li>enter-active-class</li>
+            <li>enter-to-class</li>
+            <li>leave-class</li>
+            <li>leave-active-class</li>
+            <li>leave-to-class</li>
+          </ul>
+          他们的优先级高于普通的类名，这对于 Vue 的过渡系统和其他第三方 CSS 动画库，如 Animate.css 结合使用十分有用。
+        </p>
+        <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+        <button @click="custom_css = !custom_css">Toggle render</button>
+        <transition name="custom-classes-transition" mode="" enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+          <p v-if="custom_css">Hello</p>
+        </transition>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            show: true,
+            css_transition: true,
+            css_animation: true,
+            custom_css: true
+          }
+        }
+      }).$mount('#app')
+    </script>
+    <style lang="scss" scoped>
+      /* 
+        v-enter-active 表示整个进入的过程
+        v-leave-active 表示整个离开的过程
+        其中v-enter和v-leave-to 对应进入/离开的 opacity: 0 (透明)
+        v-enter-to和v-leave 对应进入/离开的 opacity: 1 (不透明)
+       */
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.5s;
+      }
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+
+      /* CSS 过渡 */
+      .slide-fade-enter-active {
+        transition: all 0.3s ease;
+      }
+      .slide-fade-leave-active {
+        transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+      }
+      .slide-fade-enter,
+      .slide-fade-leave-to {
+        transform: translateX(10px);
+        opacity: 0;
+      }
+
+      /* CSS 动画 */
+      .bounce-enter-active {
+        animation: bounce-in 0.5s;
+      }
+      .bounce-leave-active {
+        animation: bounce-in 0.5s reverse;
+      }
+      @keyframes bounce-in {
+        0% {
+          transform: scale(0);
+        }
+        50% {
+          transform: scale(1.5);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    </style>
+  </body>
+</html>

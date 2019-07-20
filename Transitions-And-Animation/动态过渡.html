@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>动态过渡</title>
+    <script src="../vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>在 Vue 中即使是过渡也是数据驱动的！动态过渡最基本的例子是通过 name 特性来绑定动态值。</p>
+      Fade In: <input type="range" v-model="fadeInDuration" min="0" :max="maxFadeDuration" /><br />
+      Fade Out: <input type="range" v-model="fadeOutDuration" min="0" :max="maxFadeDuration" />
+      <transition name="" mode="" :css="false" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+        <p v-if="show">Hello</p>
+      </transition>
+      <button @click="stop = false; show = false" v-if="stop">Start animating</button>
+      <button v-else @click="stop = true">Stop it!</button>
+    </div>
+    <script>
+      new Vue({
+        data() {
+          return {
+            show: true,
+            stop: true,
+            fadeInDuration: 1000,
+            fadeOutDuration: 1000,
+            maxFadeDuration: 1500
+          }
+        },
+        mounted() {
+          this.show = false
+        },
+        methods: {
+          beforeEnter(el) {
+            el.style.opacity = 0
+          },
+          enter(el, done) {
+            const vm = this
+            Velocity(
+              el,
+              { opacity: 1 },
+              {
+                duration: this.fadeInDuration,
+                complete: () => {
+                  done()
+                  if (!vm.stop) {
+                    vm.show = false
+                  }
+                }
+              }
+            )
+          },
+          leave(el, done) {
+            const vm = this
+            Velocity(
+              el,
+              { opacity: 0 },
+              {
+                duration: this.fadeOutDuration,
+                complete: () => {
+                  done()
+                  vm.show = true
+                }
+              }
+            )
+          }
+        }
+      }).$mount('#app')
+    </script>
+  </body>
+</html>
