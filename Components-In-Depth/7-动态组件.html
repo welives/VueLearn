@@ -11,7 +11,12 @@
     <div id="app">
       <h3>在动态组件上使用 keep-alive</h3>
       <div>
-        <button v-for="tab in tabs" :key="tab" :class="['tab-button', {active:currentTab===tab}]" @click="currentTab=tab">
+        <button
+          v-for="(tab, index) in tabs"
+          :key="index"
+          :class="['tab-button', {active:currentTab===tab}]"
+          @click="currentTab=tab"
+        >
           {{ tab }}
         </button>
         <component :is="currentTabComponent" class="tab"></component>

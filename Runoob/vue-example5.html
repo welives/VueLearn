@@ -11,21 +11,33 @@
     <div id="app" v-cloak>
       <div class="bar">
         <!-- 两个按钮用于切换不同的列表布局 -->
-        <a class="list-icon" :class="{active:layout === 'list'}" @click="layout = 'list'"></a>
-        <a class="grid-icon" :class="{active:layout === 'grid'}" @click="layout = 'grid'"></a>
+        <a
+          class="list-icon"
+          :class="{active:layout === 'list'}"
+          @click="layout = 'list'"
+        ></a>
+        <a
+          class="grid-icon"
+          :class="{active:layout === 'grid'}"
+          @click="layout = 'grid'"
+        ></a>
       </div>
       <!-- 我们设置了两套布局页面。使用哪套依赖于 "layout" 绑定 -->
       <ul v-if="layout === 'grid'" class="grid">
         <!-- 使用大图，没有文本 -->
         <li v-for="(a,index) in articles">
-          <a :href="a.url" target="_blank"><img :src="a.image.large" alt=""/></a>
+          <a :href="a.url" target="_blank"
+            ><img :src="a.image.large" alt=""
+          /></a>
         </li>
       </ul>
 
       <ul v-if="layout === 'list'" class="list">
         <!-- 使用小图及标题 -->
         <li v-for="(a,index) in articles">
-          <a :href="a.url" target="_blank"><img :src="a.image.small" alt=""/></a>
+          <a :href="a.url" target="_blank"
+            ><img :src="a.image.small" alt=""
+          /></a>
           <p>{{ a.title }}</p>
         </li>
       </ul>

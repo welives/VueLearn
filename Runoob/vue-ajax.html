@@ -34,14 +34,16 @@
         methods: {
           get() {
             // 发送get请求
-            this.$http.get('https://www.runoob.com/try/ajax/ajax_info.txt').then(
-              (res) => {
-                this.info1 = res.body
-              },
-              () => {
-                console.log('请求失败处理')
-              }
-            )
+            this.$http
+              .get('https://www.runoob.com/try/ajax/ajax_info.txt')
+              .then(
+                (res) => {
+                  this.info1 = res.body
+                },
+                () => {
+                  console.log('请求失败处理')
+                }
+              )
           },
           post() {
             // 发送 post 请求

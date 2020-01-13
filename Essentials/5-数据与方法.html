@@ -38,7 +38,10 @@
 
       console.log('vm.data.a === data.a : ', vm.data.a === data.a)
       console.log('vm.$data.obj === obj : ', vm.$data.obj === obj)
-      console.log('vm.$el === document.querySelector("#app") : ', vm.$el === document.querySelector('#app'))
+      console.log(
+        'vm.$el === document.querySelector("#app") : ',
+        vm.$el === document.querySelector('#app')
+      )
       // 下面的监听不起作用,因为obj已经被阻止修改了
       vm.$watch('obj.foo', function(newVal, oldVal) {
         console.log('new: %s, old: %s', newVal, oldVal)

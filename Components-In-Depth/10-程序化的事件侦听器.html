@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>程序化的事件侦听器</title>
-    <script src="https://unpkg.com/pickaday@1.7.0"></script>
+    <script src="https://unpkg.com/pikaday@1.7.0"></script>
     <script src="../vue.js"></script>
   </head>
   <body>
@@ -24,7 +24,7 @@
         mounted() {
           const picker = new Pikaday({
             field: this.$refs.dateInput,
-            format: 'YYYY-MM-DD'
+            format: 'yyyy-MM-DD'
           })
 
           this.$once('hook:beforeDestory', () => {

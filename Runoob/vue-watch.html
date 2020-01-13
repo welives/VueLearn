@@ -48,7 +48,8 @@
       // $watch 是一个实例方法
       vm.$watch('kilometers', (newVal, oldVal) => {
         // 这个回调将在 vm.kilometers 改变后调用
-        document.querySelector('.info').innerHTML = '修改前值为: ' + oldVal + '，修改后值为: ' + newVal
+        document.querySelector('.info').innerHTML =
+          '修改前值为: ' + oldVal + '，修改后值为: ' + newVal
       })
     </script>
   </body>

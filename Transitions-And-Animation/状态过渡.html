@@ -20,10 +20,18 @@
       </div>
       <hr />
       <div>
-        <input type="text" v-model="colorQuery" @keyup.enter="updateColor" placeholder="Enter a color" />
+        <input
+          type="text"
+          v-model="colorQuery"
+          @keyup.enter="updateColor"
+          placeholder="Enter a color"
+        />
         <button @click="updateColor">Update</button>
         <p>Preview:</p>
-        <span :style="{backgroundColor: tweenedCSSColor}" class="color-preview"></span>
+        <span
+          :style="{backgroundColor: tweenedCSSColor}"
+          class="color-preview"
+        ></span>
         <p>{{ tweenedCSSColor }}</p>
       </div>
     </div>

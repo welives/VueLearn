@@ -11,17 +11,32 @@
     <div id="app">
       <h3>监听子组件事件</h3>
       <div :style="{fontSize:postFontSize+'em'}">
-        <blog-post v-for="(post, index) in posts" :key="index" :post="post" @enlarge-text="postFontSize+=0.1"></blog-post>
+        <blog-post
+          v-for="(post, index) in posts"
+          :key="index"
+          :post="post"
+          @enlarge-text="postFontSize+=0.1"
+        ></blog-post>
       </div>
       <hr />
 
       <h3>使用事件抛出一个值</h3>
       <div :style="{fontSize:otherPostFontSize+'em'}">
-        <other-blog-post v-for="(post, index) in posts" :key="index" :post="post" @enlarge-text="onEnlarge"></other-blog-post>
+        <other-blog-post
+          v-for="(post, index) in posts"
+          :key="index"
+          :post="post"
+          @enlarge-text="onEnlarge"
+        ></other-blog-post>
       </div>
       <h3>可以通过 $event 访问到被抛出的这个值</h3>
       <div :style="{fontSize:otherPostFontSize+'em'}">
-        <ther-blog-post v-for="(post, index) in posts" :key="index" :post="post" @enlarge-text="otherPostFontSize+=$event"></ther-blog-post>
+        <other-blog-post
+          v-for="(post, index) in posts"
+          :key="index"
+          :post="post"
+          @enlarge-text="otherPostFontSize+=$event"
+        ></other-blog-post>
       </div>
       <hr />
 
@@ -35,11 +50,19 @@
       <div>
         <code>&lt;input v-model="searchText"/&gt;</code>
         <p>等价于</p>
-        <code>&lt;input v-bind:value="searchText" @input="searchText=$event.target.value"/&gt;</code>
+        <code
+          >&lt;input v-bind:value="searchText"
+          @input="searchText=$event.target.value"/&gt;</code
+        >
       </div>
       <br />
       <div>
-        searchText: <input type="text" :value="searchText" @input="searchText=$event.target.value" />
+        searchText:
+        <input
+          type="text"
+          :value="searchText"
+          @input="searchText=$event.target.value"
+        />
         <p>searchText is : {{ searchText }}</p>
       </div>
       <hr />
@@ -68,7 +91,7 @@
         `
       })
       Vue.component('custom-input', {
-        props: { value: { type: String } },
+        props: ['value'],
         template: `
           <div>
             searchText: <input type="text" :value="value" @input="$emit('input', $event.target.value)">
@@ -91,6 +114,7 @@
         },
         methods: {
           onEnlarge(sizeAmount) {
+            console.log(sizeAmount)
             this.otherPostFontSize += sizeAmount
           }
         }

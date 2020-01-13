@@ -12,8 +12,10 @@
       <div>
         <h1>Vue.js class</h1>
         <p>
-          class 与 style 是 HTML 元素的属性，用于设置元素的样式，我们可以用 v-bind 来设置样式属性。<br />
-          Vue.js v-bind 在处理 class 和 style 时， 专门增强了它。表达式的结果类型除了字符串之外，还可以是对象或数组。
+          class 与 style 是 HTML 元素的属性，用于设置元素的样式，我们可以用
+          v-bind 来设置样式属性。<br />
+          Vue.js v-bind 在处理 class 和 style 时，
+          专门增强了它。表达式的结果类型除了字符串之外，还可以是对象或数组。
         </p>
       </div>
       <hr />
@@ -24,7 +26,9 @@
       </div>
       <hr />
       <div>
-        <p>此外，我们也可以在这里绑定返回对象的计算属性。这是一个常用且强大的模式</p>
+        <p>
+          此外，我们也可以在这里绑定返回对象的计算属性。这是一个常用且强大的模式
+        </p>
         <div :class="classObject"></div>
       </div>
       <hr />
@@ -42,7 +46,9 @@
       <div>
         <h1>Vue.js style(内联样式)</h1>
         <p>我们可以在 v-bind:style 直接设置样式</p>
-        <div :style="{color:activeColor, fontSize: fontSize + 'px'}">菜鸟教程</div>
+        <div :style="{color:activeColor, fontSize: fontSize + 'px'}">
+          菜鸟教程
+        </div>
       </div>
       <hr />
       <div>
@@ -84,8 +90,8 @@
         computed: {
           classObject() {
             return {
-              "base": true,
-              "active": this.isActive && !this.error.value,
+              base: true,
+              active: this.isActive && !this.error.value,
               'text-danger': this.error.value && this.error.type === 'fatal'
             }
           }

@@ -12,13 +12,17 @@
     <div id="app">
       <h3>用 v-for 把一个数组对应为一组元素</h3>
       <ul>
-        <li v-for="(item, index) in items" :key="index">{{ parentMessage }} - {{ index }} - {{ item.message }}</li>
+        <li v-for="(item, index) in items" :key="index">
+          {{ parentMessage }} - {{ index }} - {{ item.message }}
+        </li>
       </ul>
       <hr />
 
       <h3>在 v-for 里使用对象</h3>
       <ul>
-        <li v-for="(value, name, index) in object" :key="index">{{ index }}. {{ name }}: {{ value }}</li>
+        <li v-for="(value, name, index) in object" :key="index">
+          {{ index }}. {{ name }}: {{ value }}
+        </li>
       </ul>
     </div>
     <script>

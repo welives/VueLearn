@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>动态状态过渡</title>
     <script src="../vue.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenLite.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenLite.min.js"
+    ></script>
   </head>
   <body>
     <div id="app">
@@ -25,7 +28,9 @@
       new Vue({
         data() {
           const defaultSides = 10
-          const stats = Array.apply(null, { length: defaultSides }).map(() => 100)
+          const stats = Array.apply(null, { length: defaultSides }).map(
+            () => 100
+          )
           return {
             stats: stats,
             points: generatePoints(stats),
@@ -50,7 +55,9 @@
             }
           },
           stats(newVal) {
-            TweenLite.to(this.$data, this.updateInterval / 1000, { points: generatePoints(newVal) })
+            TweenLite.to(this.$data, this.updateInterval / 1000, {
+              points: generatePoints(newVal)
+            })
           },
           updateInterval() {
             this.resetInterval()
@@ -65,7 +72,9 @@
             this.stats = this.stats.map(() => vm.newRandomValue())
           },
           newRandomValue() {
-            return Math.ceil(this.minRadius + Math.random() * (100 - this.minRadius))
+            return Math.ceil(
+              this.minRadius + Math.random() * (100 - this.minRadius)
+            )
           },
           resetInterval() {
             const vm = this

@@ -10,7 +10,9 @@
   <body>
     <div id="app">
       <h3>对象语法</h3>
-      <div :style="{ color: activeColor, fontSize: fontSize + 'px' }">内联对象</div>
+      <div :style="{ color: activeColor, fontSize: fontSize + 'px' }">
+        内联对象
+      </div>
       <div :style="styleObject">对象语法</div>
       <div :style="classObj">计算属性</div>
       <hr />
@@ -20,7 +22,9 @@
       <hr />
 
       <h3>多重值</h3>
-      <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">多重值</div>
+      <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+        多重值
+      </div>
     </div>
     <script>
       new Vue({

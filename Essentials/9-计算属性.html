@@ -16,7 +16,7 @@
 
       <h3>计算属性缓存-vs-方法</h3>
       <!-- 计算属性是基于它们的响应式依赖进行缓存的 -->
-      <p>经过方法处理后的消息: "{{ reversedMessage }}"</p>
+      <p>经过方法处理后的消息: "{{ reversedMsg() }}"</p>
       <p>{{ now }}</p>
       <button @click="changeMsg()">修改消息</button>
       <hr />
@@ -27,10 +27,19 @@
       <hr />
 
       <h3>计算属性的-setter</h3>
-      <p>firstName <input type="text" v-model="firstName" /></p>
-      <p>lastName <input type="text" v-model="lastName" /></p>
-      <p>fullName <input type="text" v-model="fullName" /></p>
-      <p>newFullName <input type="text" v-model="newFullName" /></p>
+      <div>
+        <b>监听:</b>
+        <p>firstName <input type="text" v-model="firstName" /></p>
+        <p>lastName <input type="text" v-model="lastName" /></p>
+      </div>
+      <div>
+        <b>数据双向绑定:</b>
+        <p>fullName <input type="text" v-model="fullName" /></p>
+      </div>
+      <div>
+        <b>setter:</b>
+        <p>newFullName <input type="text" v-model="newFullName" /></p>
+      </div>
     </div>
     <script>
       const vm = new Vue({

@@ -19,7 +19,9 @@
       <h3>动态参数</h3>
       <p>
         <!-- 注意: 这里的动态参数名不能含有大写字母,否则会报警告 -->
-        <a :[attributename]="url+'.html'" @[eventname]="onMouseOver()">{{ url }}</a>
+        <a :[attributename]="url+'.html'" @[eventname]="onMouseOver()"
+          >{{ url }}</a
+        >
       </p>
       <hr />
 

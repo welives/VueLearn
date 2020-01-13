@@ -10,10 +10,29 @@
   <body>
     <div id="app">
       <div>
-        <p>多个组件的过渡简单很多 - 我们不需要使用 key 特性。相反，我们只需要使用动态组件</p>
+        <p>
+          多个组件的过渡简单很多 - 我们不需要使用 key
+          特性。相反，我们只需要使用动态组件
+        </p>
 
-        <label for="A"><input type="radio" id="A" v-model="view" value="v-a" :checked="view === 'v-a'" />A</label>
-        <label for="B"><input type="radio" id="B" v-model="view" value="v-b" :checked="view === 'v-b'" />B</label>
+        <label for="A"
+          ><input
+            type="radio"
+            id="A"
+            v-model="view"
+            value="v-a"
+            :checked="view === 'v-a'"
+          />A</label
+        >
+        <label for="B"
+          ><input
+            type="radio"
+            id="B"
+            v-model="view"
+            value="v-b"
+            :checked="view === 'v-b'"
+          />B</label
+        >
         <transition name="component-fade" mode="out-in">
           <component :is="view"></component>
         </transition>

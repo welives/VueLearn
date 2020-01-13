@@ -17,7 +17,7 @@
 
       <h3>系统修饰键</h3>
       <p><input @keyup.alt.c="onKey" /></p>
-      <div @click.ctrl="onKey">Do something</div>
+      <div @click.ctrl="onClick">Do something</div>
 
       <!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
       <button @click.ctrl="onClick">Ctrl</button>

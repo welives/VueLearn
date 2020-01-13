@@ -11,11 +11,28 @@
     <div id="app">
       <form @submit.prevent="addNewTodo()">
         <label for="new-todo">Add a todo</label>
-        <input type="text" v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat" />
+        <input
+          type="text"
+          v-model="newTodoText"
+          id="new-todo"
+          placeholder="E.g. Feed the cat"
+        />
         <button>Add</button>
       </form>
       <ul>
-        <li is="todo-item" v-for="(todo, index) in todos" :key="index" :title="todo.title" @remove="todos.splice(index,1)"></li>
+        <!-- <li
+          is="todo-item"
+          v-for="(todo, index) in todos"
+          :key="index"
+          :title="todo.title"
+          @remove="todos.splice(index,1)"
+        ></li> -->
+        <todo-item
+          v-for="(todo,index) in todos"
+          :key="index"
+          :title="todo.title"
+          @remove="todos.splice(index,1)"
+        ></todo-item>
       </ul>
     </div>
     <script>

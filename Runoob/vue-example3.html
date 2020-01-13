@@ -14,10 +14,15 @@
         <h1>Services</h1>
         <ul>
           <!-- 循环输出 services 数组, 设置选项点击后的样式 -->
-          <li v-for="(service,index) in services" :key="index" @click="toggleActive(service)" :class="{active:service.active}">
-            <!-- 
+          <li
+            v-for="(service,index) in services"
+            :key="index"
+            @click="toggleActive(service)"
+            :class="{active:service.active}"
+          >
+            <!--
               显示订单中的服务名，价格
-              Vue.js 定义了货币过滤器，用于格式化价格 
+              Vue.js 定义了货币过滤器，用于格式化价格
             -->
             {{ service.name }} <span>{{ service.price | currency }}</span>
           </li>

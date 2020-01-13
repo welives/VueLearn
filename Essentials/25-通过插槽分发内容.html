@@ -15,7 +15,12 @@
 
       <h3>动态组件</h3>
       <div>
-        <button v-for="(tab, index) in tabs" :key="index" @click="currentTab=tab" :class="['tab-button',{active:currentTab===tab}]">
+        <button
+          v-for="(tab, index) in tabs"
+          :key="index"
+          @click="currentTab=tab"
+          :class="['tab-button',{active:currentTab===tab}]"
+        >
           {{ tab }}
         </button>
         <component :is="currentTabComponent" class="tab"></component>

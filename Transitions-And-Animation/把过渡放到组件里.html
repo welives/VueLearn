@@ -10,11 +10,16 @@
   </head>
   <body>
     <div id="app">
-      <p>管理太多的状态过渡会很快的增加 Vue 实例或者组件的复杂性，幸好很多的动画可以提取到专用的子组件。</p>
-      <input type="number" v-model.number="firstNumber" step="20" /> + <input type="number" v-model.number="secondNumber" step="20" /> =
-      {{ result }}
       <p>
-        <animated-integer :value="firstNumber"></animated-integer> + <animated-integer :value="secondNumber"></animated-integer> =
+        管理太多的状态过渡会很快的增加 Vue
+        实例或者组件的复杂性，幸好很多的动画可以提取到专用的子组件。
+      </p>
+      <input type="number" v-model.number="firstNumber" step="20" /> +
+      <input type="number" v-model.number="secondNumber" step="20" /> = {{
+      result }}
+      <p>
+        <animated-integer :value="firstNumber"></animated-integer> +
+        <animated-integer :value="secondNumber"></animated-integer> =
         <animated-integer :value="result"></animated-integer>
       </p>
     </div>

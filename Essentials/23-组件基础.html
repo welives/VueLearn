@@ -14,13 +14,21 @@
       <hr />
 
       <h3>组件的复用</h3>
+      <p>
+        注意当点击按钮时，每个组件都会各自独立维护它的
+        count。因为你每用一次组件，就会有一个它的新实例被创建。
+      </p>
       <button-counter></button-counter>
       <button-counter></button-counter>
       <button-counter></button-counter>
       <hr />
 
       <h3>通过 Prop 向子组件传递数据</h3>
-      <blog-post v-for="(post, index) in posts" :key="index" :post="post"></blog-post>
+      <blog-post
+        v-for="(post, index) in posts"
+        :key="index"
+        :post="post"
+      ></blog-post>
       <hr />
     </div>
     <script>
@@ -30,7 +38,8 @@
             count: 0
           }
         },
-        template: '<button @click="count++">You clicked me {{ count }} times.</button>'
+        template:
+          '<button @click="count++">You clicked me {{ count }} times.</button>'
       })
       Vue.component('blog-post', {
         props: { post: { type: Object } },
@@ -43,7 +52,11 @@
       new Vue({
         data() {
           return {
-            posts: [{ id: 1, title: 'My journey with Vue' }, { id: 2, title: 'Blogging with Vue' }, { id: 3, title: 'Why Vue is so fun' }]
+            posts: [
+              { id: 1, title: 'My journey with Vue' },
+              { id: 2, title: 'Blogging with Vue' },
+              { id: 3, title: 'Why Vue is so fun' }
+            ]
           }
         }
       }).$mount('#app')

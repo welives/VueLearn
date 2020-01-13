@@ -13,7 +13,9 @@
       <div>{{ 'name: ' + userProfile.name }}</div>
       <div v-if="userProfile.age">{{ 'age: ' + userProfile.age }}</div>
       <div v-if="userProfile.sex">{{ 'sex: ' + userProfile.sex }}</div>
-      <div v-if="userProfile.favoriteColor">{{ 'favoriteColor: ' + userProfile.favoriteColor }}</div>
+      <div v-if="userProfile.favoriteColor">
+        {{ 'favoriteColor: ' + userProfile.favoriteColor }}
+      </div>
       <button @click="addOne()">添加一个新的属性</button>
       <button @click="addMore()">添加多个新的属性</button>
       <hr />
@@ -53,7 +55,13 @@
       <!-- 当它们处于同一节点，v-for 的优先级比 v-if 更高，这意味着 v-if 将分别重复运行于每个 v-for 循环中 -->
       <div>
         <ul>
-          <li v-for="(todo, index) in todos" :key="index" v-if="!todo.isComplete">{{ todo.name }}</li>
+          <li
+            v-for="(todo, index) in todos"
+            :key="index"
+            v-if="!todo.isComplete"
+          >
+            {{ todo.name }}
+          </li>
         </ul>
       </div>
       <div>

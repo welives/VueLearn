@@ -11,7 +11,8 @@
     <div id="app">
       <div>
         <h1>循环使用 v-for 指令</h1>
-        v-for 指令需要以 site in sites 形式的特殊语法， sites 是源数据数组并且 site 是数组元素迭代的别名。
+        v-for 指令需要以 site in sites 形式的特殊语法， sites 是源数据数组并且
+        site 是数组元素迭代的别名。
         <ol>
           <li v-for="(site,index) in sites">{{ site.name }}</li>
         </ol>

@@ -6,7 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Vue.js 过渡 & 动画</title>
     <script src="../vue.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1"
+      rel="stylesheet"
+      type="text/css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
   </head>
   <body>
@@ -33,7 +37,10 @@
       <hr />
       <div>
         <h1>CSS 动画</h1>
-        <p>CSS 动画用法类似 CSS 过渡，但是在动画中 v-enter 类名在节点插入 DOM 后不会立即删除，而是在 animationend 事件触发时删除</p>
+        <p>
+          CSS 动画用法类似 CSS 过渡，但是在动画中 v-enter 类名在节点插入 DOM
+          后不会立即删除，而是在 animationend 事件触发时删除
+        </p>
         <button @click="show3 = !show3">点我</button>
         <transition name="bounce" mode="">
           <p v-if="show3">菜鸟教程 -- 学的不仅是技术，更是梦想！！！</p>
@@ -42,9 +49,15 @@
       <hr />
       <div>
         <h1>自定义过渡的类名</h1>
-        <p>自定义过渡的类名优先级高于普通的类名，这样就能很好的与第三方（如：animate.css）的动画库结合使用</p>
+        <p>
+          自定义过渡的类名优先级高于普通的类名，这样就能很好的与第三方（如：animate.css）的动画库结合使用
+        </p>
         <button @click="show4 = !show4">点我</button>
-        <transition name="custom-classes-transiton" enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+        <transition
+          name="custom-classes-transiton"
+          enter-active-class="animated tada"
+          leave-active-class="animated bounceOutRight"
+        >
           <p v-if="show4">菜鸟教程 -- 学的不仅是技术，更是梦想！！！</p>
         </transition>
       </div>
@@ -52,7 +65,12 @@
       <div>
         <h1>JavaScript 钩子</h1>
         <button @click="show5 = !show5">点我</button>
-        <transition @before-enter="beforeEnter" @enter="enter" @leave="leave" :css="false">
+        <transition
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @leave="leave"
+          :css="false"
+        >
           <p v-if="show5">菜鸟教程 -- 学的不仅是技术，更是梦想！！！</p>
         </transition>
       </div>
@@ -82,9 +100,22 @@
             Velocity(el, { fontSize: '1em' }, { complete: done })
           },
           leave(el, done) {
-            Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+            Velocity(
+              el,
+              { translateX: '15px', rotateZ: '50deg' },
+              { duration: 600 }
+            )
             Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
-            Velocity(el, { rotateZ: '45deg', translateY: '30px', translateX: '30px', opacity: 0 }, { complete: done })
+            Velocity(
+              el,
+              {
+                rotateZ: '45deg',
+                translateY: '30px',
+                translateX: '30px',
+                opacity: 0
+              },
+              { complete: done }
+            )
           }
         }
       }).$mount('#app')

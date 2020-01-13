@@ -15,20 +15,29 @@
       </ol>
       <ul>
         <!-- 子组件通过prop接口获取父组件传递过来的数据 -->
-        <prop-item v-for="(item, index) in propList" :key="index" :todo="item"></prop-item>
+        <prop-item
+          v-for="(item, index) in propList"
+          :key="index"
+          :todo="item"
+        ></prop-item>
       </ul>
     </div>
     <script>
+      // 定义子组件
       Vue.component('todo-item', { template: `<li>这是个待办项</li>` })
       Vue.component('prop-item', {
-        // 模板中声明了使用todo作为props
+        // 子组件中声明了使用todo作为props
         props: { todo: { type: Object } },
         template: `<li>{{todo.text}}</li>`
       })
       new Vue({
         data() {
           return {
-            propList: [{ text: '蔬菜' }, { text: '奶酪' }, { text: '随便其它什么人吃的东西' }]
+            propList: [
+              { text: '蔬菜' },
+              { text: '奶酪' },
+              { text: '随便其它什么人吃的东西' }
+            ]
           }
         }
       }).$mount('#app')

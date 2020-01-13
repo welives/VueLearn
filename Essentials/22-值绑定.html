@@ -11,9 +11,14 @@
     <div id="app">
       <h3>复选框</h3>
       <div>
-        <input type="checkbox" v-model="toggle" true-value="yes" false-value="no" />
+        <input
+          type="checkbox"
+          v-model="toggle"
+          true-value="yes"
+          false-value="no"
+        />
         <p>
-          <label>{{ 'toggle: ' + toggle }}</label>
+          <label>toggle: {{ toggle }}</label>
         </p>
       </div>
       <hr />
@@ -23,7 +28,7 @@
         <input type="radio" v-model="pick" :value="a" />
         <input type="radio" v-model="pick" :value="b" />
         <p>
-          <label>{{ 'pick: ' + pick }}</label>
+          <label>pick: {{ pick }}</label>
         </p>
       </div>
       <hr />
@@ -32,11 +37,13 @@
       <div>
         <select v-model="selected">
           <!-- 内联对象字面量 -->
-          <option value=""></option>
+          <option disabled value="">请选择</option>
           <option :value="{ number: 123 }">123</option>
+          <option :value="{ number: 456 }">456</option>
+          <option :value="{ number: 789 }">789</option>
         </select>
         <p>
-          <label>{{ selected.number ? 'selected: ' + selected.number : 'selected: ' }}</label>
+          <label>selected: {{ selected.number ? selected.number : '' }}</label>
         </p>
       </div>
       <hr />

@@ -12,7 +12,12 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  extends: ['prettier', 'prettier/vue', 'plugin:vue/recommended', 'eslint:recommended'],
+  extends: [
+    'prettier',
+    'prettier/vue',
+    'plugin:vue/recommended',
+    'eslint:recommended'
+  ],
   plugins: ['prettier', 'vue', 'html'],
   // add your custom rules here
   rules: {
@@ -291,7 +296,15 @@ module.exports = {
       'error',
       'always',
       {
-        markers: ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ',']
+        markers: [
+          'global',
+          'globals',
+          'eslint',
+          'eslint-disable',
+          '*package',
+          '!',
+          ','
+        ]
       }
     ], // 强制在注释中 // 或 /* 使用一致的空格
     'switch-colon-spacing': 'error', // 强制在 switch 的冒号左右有空格

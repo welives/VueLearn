@@ -10,13 +10,37 @@
   </head>
   <body>
     <div id="app">
-      <p>在 Vue 中即使是过渡也是数据驱动的！动态过渡最基本的例子是通过 name 特性来绑定动态值。</p>
-      Fade In: <input type="range" v-model="fadeInDuration" min="0" :max="maxFadeDuration" /><br />
-      Fade Out: <input type="range" v-model="fadeOutDuration" min="0" :max="maxFadeDuration" />
-      <transition name="" mode="" :css="false" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+      <p>
+        在 Vue 中即使是过渡也是数据驱动的！动态过渡最基本的例子是通过 name
+        特性来绑定动态值。
+      </p>
+      Fade In:
+      <input
+        type="range"
+        v-model="fadeInDuration"
+        min="0"
+        :max="maxFadeDuration"
+      /><br />
+      Fade Out:
+      <input
+        type="range"
+        v-model="fadeOutDuration"
+        min="0"
+        :max="maxFadeDuration"
+      />
+      <transition
+        name=""
+        mode=""
+        :css="false"
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @leave="leave"
+      >
         <p v-if="show">Hello</p>
       </transition>
-      <button @click="stop = false; show = false" v-if="stop">Start animating</button>
+      <button @click="stop = false; show = false" v-if="stop">
+        Start animating
+      </button>
       <button v-else @click="stop = true">Stop it!</button>
     </div>
     <script>

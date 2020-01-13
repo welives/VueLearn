@@ -29,13 +29,17 @@
       <h3>事件修饰符</h3>
       <div>
         <!-- 阻止单击事件继续传播 -->
-        <a href="18-在组件上使用v-for.html" @click.stop="doThis">18-在组件上使用v-for</a>
+        <a href="18-在组件上使用v-for.html" @click.stop="doThis"
+          >18-在组件上使用v-for</a
+        >
 
         <!-- 提交事件不再重载页面 -->
         <form @submit.prevent="doThis"><button>Submit</button></form>
 
         <!-- 修饰符可以串联 -->
-        <a @click.stop.prevent="doThis" href="17-对象变更检测注意事项.html">17-对象变更检测注意事项</a>
+        <a @click.stop.prevent="doThis" href="17-对象变更检测注意事项.html"
+          >17-对象变更检测注意事项</a
+        >
 
         <!-- 只有修饰符 -->
         <form @submit.prevent><button>Submit</button></form>
@@ -68,7 +72,7 @@
         methods: {
           greet(e) {
             console.log(e)
-            alert('hello' + this.name)
+            alert('hello ' + this.name)
           },
           say(msg) {
             alert(msg)

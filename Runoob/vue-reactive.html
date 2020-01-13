@@ -55,6 +55,10 @@
           </p>
         </div>
       </div>
+      <hr>
+      <ul>
+        <li v-for="(item,name,index) in products">{{ name }} =&gt; {{ item }}</li>
+      </ul>
     </div>
     <script>
       const myproduct = { 'id': 1, 'name': 'book', 'price': '20.00' }
@@ -68,6 +72,7 @@
         watch: {
           counter(newVal, oldVal) {
             // alert('计数器值的变化 :' + oldVal + ' 变为 ' + newVal + '!')
+            this.products.insideCounter = this.counter
             console.log('计数器值的变化 :' + oldVal + ' 变为 ' + newVal + '!')
           }
         }
@@ -77,11 +82,12 @@
       }, 2000)
 
       vm.products.test = 'test'
-      Vue.set(myproduct, 'qty', 1)
-      
+      myproduct.outsideCounter = vm.counter
+      Vue.set(myproduct, 'qty', vm.counter)
+
       Vue.delete(myproduct, 'price')
       console.log(vm)
-      
+
     </script>
   </body>
 </html>

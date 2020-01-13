@@ -25,13 +25,22 @@
         <li v-for="(item, index) in tests" :key="index">{{ item }}</li>
       </ul>
       <div>
-        <p>1. 当你利用索引直接设置一个数组项时，例如：<code>vm.items[indexOfItem] = newValue</code></p>
+        <p>由于 JavaScript 的限制，Vue 不能检测以下数组的变动：</p>
+        <p>
+          1. 当你利用索引直接设置一个数组项时，例如：<code
+            >vm.items[indexOfItem] = newValue</code
+          >
+        </p>
         <button @click="setValue1()">点我设置数组元素并不会生效</button>
         <button @click="setValue2()">但是点我就可以</button>
         <button @click="setValue3()">点我也可以</button>
       </div>
       <div>
-        <p>2. 当你修改数组的长度时，例如：<code>vm.items.length = newLength</code></p>
+        <p>
+          2. 当你修改数组的长度时，例如：<code
+            >vm.items.length = newLength</code
+          >
+        </p>
         <button @click="changeLength1()">点我修改数组长度并不会生效</button>
         <button @click="changeLength2()">但是点我就可以</button>
       </div>
@@ -51,7 +60,7 @@
             })
           },
           setValue1() {
-            this.tests[1] = 'x' // 不是响应性的
+            this.tests[1] = 'x' // 不是响应式的
             console.log(this.tests)
           },
           setValue2() {
@@ -64,7 +73,7 @@
             console.log(this.tests)
           },
           changeLength1() {
-            this.tests.length = 2 // 不是响应性的
+            this.tests.length = 2 // 不是响应式的
             console.log(this.tests)
           },
           changeLength2() {

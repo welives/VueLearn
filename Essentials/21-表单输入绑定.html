@@ -18,9 +18,14 @@
 
       <h3>多行文本</h3>
       <div>
-        <p style="white-space: pre-line;">Multiline message is:{{ textarea }}</p>
+        <p style="white-space: pre-line;">
+          Multiline message is:{{ textarea }}
+        </p>
         <!-- 在文本区域插值 (<textarea>{{text}}</textarea>) 并不会生效，应用 v-model 来代替 -->
-        <textarea v-model="textarea" placeholder="add multiple lines"></textarea>
+        <textarea
+          v-model="textarea"
+          placeholder="add multiple lines"
+        ></textarea>
       </div>
       <hr />
 
@@ -29,7 +34,7 @@
         <!-- 单个复选框，绑定到布尔值 -->
         <p>单个复选框</p>
         <input type="checkbox" id="checkbox" v-model="checked" />
-        <label for="checkbox">{{ checked }}</label>
+        <label for="checkbox">{{ checked ? 'true' : 'false' }}</label>
       </div>
       <div>
         <!-- 多个复选框，绑定到同一个数组 -->
@@ -104,7 +109,11 @@
             selected1: '',
             selected2: [],
             selected3: '',
-            options: [{ text: 'One', value: 'A' }, { text: 'Two', value: 'B' }, { text: 'Three', value: 'C' }]
+            options: [
+              { text: 'One', value: 'A' },
+              { text: 'Two', value: 'B' },
+              { text: 'Three', value: 'C' }
+            ]
           }
         }
       }).$mount('#app')
