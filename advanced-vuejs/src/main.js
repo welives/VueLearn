@@ -4,6 +4,10 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+// 全局引入mixin
+// import mixin from '@/components/mixin/mixin.js'
+// Vue.mixin(mixin)
+
 new Vue({
   router,
   render: (h) => h(App)

@@ -7,6 +7,7 @@
           v-model="form.username"
           type="text"
           class="form-control"
+          v-focus
         />
       </z-form-item>
       <z-form-item label="邮箱" name="email">
@@ -28,10 +29,17 @@
 import zForm from './z-form.vue'
 import zFormItem from './z-form-item.vue'
 export default {
-  name: 'FormDemo',
+  name: 'formDemo',
   components: {
     zForm,
     zFormItem
+  },
+  directives: {
+    focus: {
+      inserted(el) {
+        el.focus()
+      }
+    }
   },
   data() {
     return {

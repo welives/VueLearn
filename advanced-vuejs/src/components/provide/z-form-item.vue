@@ -14,7 +14,7 @@ let rules = {
   email: /^([a-zA-Z0-9_\-\.])+\@([a-zA-Z0-9_\-\.])+\.([a-zA-Z]{2,4})$/
 }
 export default {
-  name: 'ZFormItem',
+  name: 'zFormItem',
   props: ['label', 'name'],
   // 接收父组件注入的属性
   inject: ['form', 'validate'],

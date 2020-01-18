@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-3">
     <h1 class="p-5">{{ title }}</h1>
     <demo-item />
   </div>
@@ -8,7 +8,7 @@
 <script>
 import demoItem from './demo-item.vue'
 export default {
-  name: 'DemoProvide',
+  name: 'provideDemo',
   provide() {
     return {
       title: this.title,

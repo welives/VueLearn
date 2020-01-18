@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'demo-item',
+  name: 'demoItem',
   data() {
     return {
       header: '我是子组件'
