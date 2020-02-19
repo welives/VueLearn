@@ -87,7 +87,7 @@ export default new Router({
         {
           path: 'page',
           name: 'page',
-          component: () => import('@/components/mixin/page')
+          component: () => import('@/components/mixin/page.vue')
         },
         {
           path: 'slot',
