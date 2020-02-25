@@ -4,8 +4,8 @@
     <div class="form-group">
       <e-input
         :value="value"
-        @input="value = $event"
         label="第一种写法"
+        @input="value = $event"
       ></e-input>
     </div>
     <div class="form-group">
@@ -18,7 +18,7 @@
 <script>
 import eInput from './e-input.vue'
 export default {
-  name: 'vModel',
+  name: 'VModel',
   components: {
     eInput
   },

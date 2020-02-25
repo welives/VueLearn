@@ -31,9 +31,9 @@
         <div>我是默认slot的内容</div>
         <ul class="list-group">
           <li
-            class="list-group-item"
             v-for="(item, index) in list"
             :key="index"
+            class="list-group-item"
           >
             {{ item }}
           </li>
@@ -49,7 +49,7 @@
 <script>
 import demoItem from './demo-item.vue'
 export default {
-  name: 'vSlot',
+  name: 'VSlot',
   components: {
     demoItem
   }

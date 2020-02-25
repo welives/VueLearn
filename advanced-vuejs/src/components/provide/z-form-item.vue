@@ -9,12 +9,12 @@
 </template>
 
 <script>
-let rules = {
+const rules = {
   username: /^[a-zA-Z0-9_-]{4,16}$/,
   email: /^([a-zA-Z0-9_\-\.])+\@([a-zA-Z0-9_\-\.])+\.([a-zA-Z]{2,4})$/
 }
 export default {
-  name: 'zFormItem',
+  name: 'ZFormItem',
   props: ['label', 'name'],
   // 接收父组件注入的属性
   inject: ['form', 'validate'],
@@ -29,7 +29,7 @@ export default {
   },
   mounted() {
     // 拿到插槽对应的输入框
-    let el = this.$slots.default[0]
+    const el = this.$slots.default[0]
     if (!el) return
     this.elm = el.elm
 
@@ -53,7 +53,7 @@ export default {
       }
       // 2.验证其他规则
       if (this.valis.rule && this.valis.rule.data) {
-        let currentRule = rules[this.valis.rule.data]
+        const currentRule = rules[this.valis.rule.data]
           ? rules[this.valis.rule.data]
           : this.valis.rule.data
         if (!currentRule.test(newValue)) {
@@ -66,8 +66,8 @@ export default {
   },
   methods: {
     check(flag, msg) {
-      let status = flag === 'success'
-      let obj = {
+      const status = flag === 'success'
+      const obj = {
         status: status ? 1 : 0,
         msg: msg,
         before: status ? 'is-invalid' : 'is-valid',

@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'demoItem',
+  name: 'DemoItem',
   props: ['msg'],
   methods: {
     // clickEvent() {

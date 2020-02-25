@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'nextTick',
+  name: 'NextTick',
   data() {
     return {
       msg: '$nextTick案例'

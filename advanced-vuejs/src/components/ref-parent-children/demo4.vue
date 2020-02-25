@@ -11,7 +11,7 @@
 <script>
 import demoItem from './demo-item.vue'
 export default {
-  name: 'refDemo4',
+  name: 'RefDemo4',
   components: {
     demoItem
   },

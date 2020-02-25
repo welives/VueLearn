@@ -12,13 +12,13 @@
 
 <script>
 export default {
-  name: 'eInput',
-  props: ['value', 'label'],
+  name: 'EInput',
   // 第二种写法,下面的注释掉也没关系,因为一个组件上的 v-model 默认会利用名为 value 的 prop 和名为 input 的事件
   model: {
     prop: 'value',
     event: 'input'
-  }
+  },
+  props: ['value', 'label']
 }
 </script>
 

@@ -7,7 +7,7 @@
 <script>
 import demoItem from './demo-item.vue'
 export default {
-  name: 'refDemo3',
+  name: 'RefDemo3',
   components: {
     demoItem
   },

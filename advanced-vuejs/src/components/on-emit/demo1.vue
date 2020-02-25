@@ -10,7 +10,7 @@
 <script>
 import demoItem from './demo-item1.vue'
 export default {
-  name: 'onEmitDemo1',
+  name: 'OnEmitDemo1',
   provide() {
     return {
       $_demo: this

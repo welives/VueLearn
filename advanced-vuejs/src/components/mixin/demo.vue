@@ -2,9 +2,9 @@
   <div class="mt-3">
     <ul class="list-group">
       <li
-        class="list-group-item"
         v-for="(item, index) in list"
         :key="index"
+        class="list-group-item"
         @click="test(index)"
       >
         {{ item }}
@@ -16,7 +16,7 @@
 <script>
 import mixin from './mixin.js'
 export default {
-  name: 'mixin',
+  name: 'Mixin',
   mixins: [mixin],
   data() {
     return {

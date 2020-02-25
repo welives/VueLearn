@@ -3,10 +3,10 @@
     <!-- 获取列表 -->
     <ul class="list-group">
       <li
-        class="list-group-item"
         v-for="(item, index) in list"
         :key="index"
         ref="list"
+        class="list-group-item"
       >
         {{ item }}
       </li>
@@ -15,7 +15,7 @@
 </template>
 <script>
 export default {
-  name: 'refDemo2',
+  name: 'RefDemo2',
   data() {
     return {
       list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

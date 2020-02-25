@@ -5,9 +5,9 @@
         <input
           id="username"
           v-model="form.username"
+          v-focus
           type="text"
           class="form-control"
-          v-focus
         />
       </z-form-item>
       <z-form-item label="邮箱" name="email">
@@ -29,7 +29,7 @@
 import zForm from './z-form.vue'
 import zFormItem from './z-form-item.vue'
 export default {
-  name: 'formDemo',
+  name: 'FormDemo',
   components: {
     zForm,
     zFormItem

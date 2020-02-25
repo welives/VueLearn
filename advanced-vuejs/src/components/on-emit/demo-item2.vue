@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'demoItem2',
+  name: 'DemoItem2',
   inject: ['$_index'],
   data() {
     return {

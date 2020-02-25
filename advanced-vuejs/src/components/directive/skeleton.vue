@@ -1,17 +1,17 @@
 <template>
   <div class="mt-3">
     <div class="row">
-      <div class="col-4 mb-3" v-for="(item, index) in imgs" :key="index">
+      <div v-for="(item, index) in imgs" :key="index" class="col-4 mb-3">
         <img
+          v-skeleton.img="item.src"
           alt=""
           class="w-100 mb-2"
-          v-skeleton.img="item.src"
           style="min-height: 100px;"
         />
         <h5
+          v-skeleton.text="item.name"
           class="w-100"
           style="min-height: 30px;"
-          v-skeleton.text="item.name"
         ></h5>
       </div>
     </div>
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'skeleton',
+  name: 'Skeleton',
   directives: {
     skeleton: {
       bind(el) {

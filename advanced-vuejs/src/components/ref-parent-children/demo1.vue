@@ -3,21 +3,21 @@
     <!-- 获取普通元素 -->
     <div class="mt-3">
       <h3>获取input</h3>
-      <input type="text" class="form-control" ref="input1" />
+      <input ref="input1" type="text" class="form-control" />
     </div>
     <div class="mt-3">
       <h3>修改样式</h3>
-      <input type="text" class="form-control" ref="input2" />
+      <input ref="input2" type="text" class="form-control" />
     </div>
     <div class="mt-3">
       <h3>获取焦点</h3>
-      <input type="text" class="form-control" ref="input3" />
+      <input ref="input3" type="text" class="form-control" />
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'refDemo1',
+  name: 'RefDemo1',
   data() {
     return {}
   },

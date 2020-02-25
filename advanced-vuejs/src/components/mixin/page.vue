@@ -11,7 +11,7 @@
 <script>
 import page from './page.js'
 export default {
-  name: 'page',
+  name: 'Page',
   mixins: [page],
   data() {
     return {

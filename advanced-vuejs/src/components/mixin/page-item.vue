@@ -9,9 +9,9 @@
           </a>
         </li>
         <li
-          class="page-item"
           v-for="item in getPage"
           :key="item"
+          class="page-item"
           :class="current === item ? 'active' : ''"
         >
           <a
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'pageItem',
+  name: 'PageItem',
   props: ['current', 'total', 'limit'],
   computed: {
     getPage() {

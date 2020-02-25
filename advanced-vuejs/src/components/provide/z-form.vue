@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'zForm',
+  name: 'ZForm',
   props: ['form', 'validate'],
   // 依赖注入到子组件
   provide() {

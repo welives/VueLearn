@@ -7,7 +7,7 @@
 <script>
 import demoItem from './demo-item.vue'
 export default {
-  name: 'sync',
+  name: 'Sync',
   components: {
     demoItem
   },

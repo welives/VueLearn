@@ -9,7 +9,7 @@
 <script>
 import demoItem from './demo-item2.vue'
 export default {
-  name: 'onEmitDemo2',
+  name: 'OnEmitDemo2',
   inject: ['$_index'],
   components: {
     demoItem

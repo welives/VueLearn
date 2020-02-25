@@ -1,13 +1,13 @@
 <template>
   <div class="mt-3">
     <h3>{{ header }}</h3>
-    <input type="text" class="form-control" ref="input" @input="changeInput" />
+    <input ref="input" type="text" class="form-control" @input="changeInput" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'demoItem',
+  name: 'DemoItem',
   data() {
     return {
       header: '我是子组件'

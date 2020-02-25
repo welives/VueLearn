@@ -14,7 +14,7 @@
 <script>
 import eTable from './e-table.vue'
 export default {
-  name: 'tableDemo',
+  name: 'TableDemo',
   components: {
     eTable
   },

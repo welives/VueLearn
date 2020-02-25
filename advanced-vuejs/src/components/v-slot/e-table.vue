@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'eTable',
+  name: 'ETable',
   props: ['columns', 'data']
 }
 </script>

@@ -3,16 +3,16 @@
     <div v-show="showMsg" class="alert alert-primary">消息提示</div>
     <nav class="nav nav-pills nav-justified">
       <router-link
-        :to="item.url"
         v-for="(item, index) in navList"
         :key="index"
-        :class="['nav-link', { active: currentNav === item.name }]"
-        @click.native="currentNav = item.name"
+        :to="item.url"
+        :class="['nav-link', { active: navIndex === index }]"
+        @click.native="changeNav(index, item)"
         >{{ item.name }}</router-link
       >
     </nav>
     <router-view></router-view>
-    <button class="btn btn-primary" @click="clickEvent()" v-show="showBtn">
+    <button v-show="showBtn" class="btn btn-primary" @click="clickEvent()">
       index.vue点击事件
     </button>
   </div>
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'index',
+  name: 'Index',
   provide() {
     return {
       showHide: this.showHide,
@@ -31,6 +31,7 @@ export default {
     return {
       showMsg: false,
       showBtn: false,
+      navIndex: 0,
       navList: [
         { name: '首页', url: '/' },
         { name: '获取普通元素', url: 'refDemo1' },
@@ -50,21 +51,44 @@ export default {
         { name: '混入', url: 'mixin' },
         { name: '分页组件实例', url: 'page' },
         { name: '插槽', url: 'slot' },
-        { name: '表格组件实例', url: 'table' }
+        { name: '表格组件实例', url: 'table' },
+        { name: 'Vuex的State使用', url: 'state' },
+        { name: 'Vuex的Getters使用', url: 'getters' },
+        { name: 'Vuex的Mutations使用', url: 'mutations' },
+        { name: 'Vuex的Actions使用', url: 'actions' }
       ],
       currentNav: '首页'
     }
   },
   watch: {
-    currentNav(value) {
-      if (value == '全局监听') {
+    currentNav(newValue) {
+      if (newValue === '全局监听') {
         this.showBtn = true
       } else {
         this.showBtn = false
       }
+    },
+    navIndex() {
+      const key = 'navActive'
+      sessionStorage.setItem(key, JSON.stringify({ nav: this.navIndex }))
     }
   },
+  created() {
+    this.__initNavBar()
+  },
   methods: {
+    __initNavBar() {
+      let n = sessionStorage.getItem('navActive')
+      if (n) {
+        n = JSON.parse(n)
+        this.navIndex = n.nav
+      }
+    },
+    changeNav(index, item) {
+      if (this.navIndex === index) return
+      this.navIndex = index
+      this.currentNav = item.name
+    },
     showHide(data) {
       this.showMsg = data
     },

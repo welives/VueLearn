@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'demoItem',
+  name: 'DemoItem',
   data() {
     return {
       header: '我是子组件的头部',

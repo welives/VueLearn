@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'demoItem1',
+  name: 'DemoItem1',
   inject: ['$_demo'],
   data() {
     return {
