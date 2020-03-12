@@ -19,7 +19,9 @@
         />
       </z-form-item>
       <z-form-item>
-        <button type="submit" class="btn btn-primary">提交</button>
+        <button type="submit" class="btn btn-primary" @click="onSubmit">
+          提交
+        </button>
       </z-form-item>
     </z-form>
   </div>
@@ -75,6 +77,11 @@ export default {
           }
         }
       ]
+    }
+  },
+  methods: {
+    onSubmit() {
+      console.log(this.form)
     }
   }
 }

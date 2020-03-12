@@ -55,7 +55,8 @@ export default {
         { name: 'Vuex的State使用', url: 'state' },
         { name: 'Vuex的Getters使用', url: 'getters' },
         { name: 'Vuex的Mutations使用', url: 'mutations' },
-        { name: 'Vuex的Actions使用', url: 'actions' }
+        { name: 'Vuex的Actions使用', url: 'actions' },
+        { name: 'Mock示例', url: 'mock' }
       ],
       currentNav: '首页'
     }

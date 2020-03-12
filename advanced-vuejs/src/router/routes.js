@@ -112,6 +112,11 @@ const routes = [
         path: 'actions',
         name: 'actions',
         component: () => import('@/components/vuex/actions')
+      },
+      {
+        path: 'mock',
+        name: 'mock',
+        component: () => import('@/components/mock/demo')
       }
     ]
   }
