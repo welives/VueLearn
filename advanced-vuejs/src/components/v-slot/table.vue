@@ -1,11 +1,11 @@
 <template>
   <div class="mt-3">
-    <e-table :columns="columns" :data="data">
-      <template #action="{data}">
-        <button class="btn btn-primary mr-2" @click="edit(data.item)">
+    <e-table :columns="columns" :data="tableData">
+      <template #action="{scope}">
+        <button class="btn btn-primary mr-2" @click="edit(scope.item)">
           修改
         </button>
-        <button class="btn btn-danger" @click="del(data.index)">删除</button>
+        <button class="btn btn-danger" @click="del(scope.index)">删除</button>
       </template>
     </e-table>
   </div>
@@ -26,7 +26,7 @@ export default {
         { name: '年龄', slot: 'age' },
         { name: '操作', slot: 'action' }
       ],
-      data: [
+      tableData: [
         { name: '小明', sex: '男', age: 22 },
         { name: '小红', sex: '女', age: 23 },
         { name: '小黄', sex: '男', age: 20 }
@@ -38,7 +38,7 @@ export default {
       item.name = Math.floor(Math.random() * 10).toString()
     },
     del(index) {
-      this.data.splice(index, 1)
+      this.tableData.splice(index, 1)
     }
   }
 }

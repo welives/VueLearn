@@ -9,7 +9,7 @@
       <tr v-for="(item, index) in data" :key="index">
         <td v-for="(td, tdi) in columns" :key="tdi">
           {{ item[td.slot] || '' }}
-          <slot :name="td.slot" :data="{ item, index }"></slot>
+          <slot :name="td.slot" :scope="{ item, index }"></slot>
         </td>
       </tr>
     </tbody>
