@@ -1,5 +1,15 @@
 <template>
   <div class="p-3">
+    <div class="my-2 d-flex">
+      <el-button
+        class="ml-auto"
+        v-if="getToken"
+        type="primary"
+        @click="logout"
+        :loading="loading"
+        >{{ loading ? '退出中...' : '模拟退出' }}</el-button
+      >
+    </div>
     <div v-show="showMsg" class="alert alert-primary">消息提示</div>
     <nav class="nav nav-pills nav-justified">
       <router-link
@@ -11,6 +21,13 @@
         >{{ item.name }}</router-link
       >
     </nav>
+    <el-table v-if="getToken" :data="tableData" border>
+      <el-table-column prop="id" label="ID"></el-table-column>
+      <el-table-column prop="username" label="用户名"></el-table-column>
+      <el-table-column prop="name" label="姓名"></el-table-column>
+      <el-table-column prop="age" label="年龄"></el-table-column>
+      <el-table-column prop="email" label="邮箱"></el-table-column>
+    </el-table>
     <router-view></router-view>
     <button v-show="showBtn" class="btn btn-primary" @click="clickEvent()">
       index.vue点击事件
@@ -19,6 +36,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Index',
   provide() {
@@ -29,6 +47,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       showMsg: false,
       showBtn: false,
       navIndex: 0,
@@ -56,9 +75,17 @@ export default {
         { name: 'Vuex的Getters使用', url: 'getters' },
         { name: 'Vuex的Mutations使用', url: 'mutations' },
         { name: 'Vuex的Actions使用', url: 'actions' },
-        { name: 'Mock示例', url: 'mock' }
+        { name: 'Mock模拟登录', url: 'mock' }
       ],
       currentNav: '首页'
+    }
+  },
+  computed: {
+    ...mapGetters(['getToken', 'getUser']),
+    tableData() {
+      let arr = []
+      arr.push(this.getUser)
+      return this.getToken ? arr : []
     }
   },
   watch: {
@@ -97,6 +124,15 @@ export default {
       this.$emit('test', {
         value: '我是index.vue的点击事件'
       })
+    },
+    logout() {
+      this.loading = true
+      setTimeout(() => {
+        this.$store.dispatch('user/logout').then(() => {
+          this.loading = false
+          this.$router.push({ name: 'mock' })
+        })
+      }, 500)
     }
   }
 }

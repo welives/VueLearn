@@ -1,6 +1,7 @@
 const routes = [
   {
     path: '/',
+    name: 'index',
     component: () => import('@/components/index'),
     children: [
       {
@@ -119,6 +120,7 @@ const routes = [
         component: () => import('@/components/mock/demo')
       }
     ]
-  }
+  },
+  { path: '*', redirect: { name: 'index' } }
 ]
 export default routes

@@ -12,13 +12,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  extends: [
-    'prettier',
-    'prettier/vue',
-    'plugin:vue/recommended',
-    'eslint:recommended'
-  ],
-  plugins: ['prettier', 'vue', 'html'],
+  extends: ['plugin:vue/recommended', 'eslint:recommended'],
   // add your custom rules here
   rules: {
     'vue/max-attributes-per-line': [

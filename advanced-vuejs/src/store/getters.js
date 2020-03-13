@@ -6,5 +6,7 @@ export default {
   },
   getById: (state) => (id) => {
     return state.test.list.filter((v) => v.id === id)
-  }
+  },
+  getToken: (state) => state.user.token,
+  getUser: (state) => state.user.user
 }
