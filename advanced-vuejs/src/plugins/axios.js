@@ -65,7 +65,7 @@ Plugin.install = (Vue, options) => {
   Vue.axios = service
   window.axios = service
   Object.defineProperties(Vue.prototype, {
-    axios: {
+    $api: {
       get() {
         return service
       }

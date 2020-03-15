@@ -1,4 +1,5 @@
 import { login, logout } from '@/api/login'
+import { getToken, setToken, removeToken } from '@/utils/auth'
 export default {
   namespaced: true,
   state: {
@@ -15,8 +16,8 @@ export default {
   },
   actions: {
     initUser({ commit }) {
-      const user = sessionStorage.getItem('user')
-      const token = sessionStorage.getItem('token')
+      const user = getToken('user')
+      const token = getToken('token')
       if (user) {
         commit('SET_USER', JSON.parse(user))
       }
@@ -32,8 +33,8 @@ export default {
             const { data } = response
             commit('SET_USER', data.data)
             commit('SET_TOKEN', data.token)
-            sessionStorage.setItem('user', JSON.stringify(data.data))
-            sessionStorage.setItem('token', data.token)
+            setToken('user', JSON.stringify(data.data))
+            setToken('token', data.token)
             resolve()
           })
           .catch((error) => {
@@ -47,7 +48,8 @@ export default {
           .then(() => {
             commit('SET_USER', {})
             commit('SET_TOKEN', false)
-            sessionStorage.clear()
+            removeToken('user')
+            removeToken('token')
             resolve()
           })
           .catch((error) => {

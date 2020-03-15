@@ -320,13 +320,6 @@ module.exports = {
       }
     ], // 强制箭头函数的箭头前后使用一致的空格
     'constructor-super': 'error', // 要求在构造函数中有 super() 的调用
-    'generator-star-spacing': [
-      'error',
-      {
-        before: true,
-        after: true
-      }
-    ], // 强制 generator 函数中 * 号周围使用一致的空格
     'no-class-assign': 'error', // 禁止修改类声明的变量
     'no-const-assign': 'error', // 禁止修改 const 声明的变量
     'no-dupe-class-members': 'error', // 禁止类成员中出现重复的名称
@@ -340,7 +333,8 @@ module.exports = {
     'prefer-spread': 'error', // 要求使用扩展运算符而非 .apply()
     'rest-spread-spacing': 'error', // 强制剩余和扩展运算符及其表达式之间有空格
     'template-curly-spacing': ['error', 'never'], // 要求或禁止模板字符串中的嵌入表达式周围空格的使用
-    'yield-star-spacing': ['error', 'both'], // 强制在 yield* 表达式中 * 周围使用空格
+    'generator-star-spacing': ['off', 'after'], // 强制 generator 函数中 * 号周围使用一致的空格
+    'yield-star-spacing': ['error', 'after'], // 强制在 yield* 表达式中 * 周围使用空格
 
     // Deprecated
     'no-native-reassign': 'error',

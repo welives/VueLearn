@@ -72,6 +72,7 @@ export default {
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.loading = false
             this.$router.push({ name: 'index' })
+            this.$parent.__initNavBar()
           })
         }, 500)
       })

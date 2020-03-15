@@ -28,6 +28,7 @@
       <el-table-column prop="age" label="年龄"></el-table-column>
       <el-table-column prop="email" label="邮箱"></el-table-column>
     </el-table>
+    <hr />
     <router-view></router-view>
     <button v-show="showBtn" class="btn btn-primary" @click="clickEvent()">
       index.vue点击事件
@@ -57,6 +58,7 @@ export default {
         { name: '获取列表', url: 'refDemo2' },
         { name: '获取组件', url: 'refDemo3' },
         { name: '子组件操作父组件', url: 'refDemo4' },
+        { name: 'eventBus案例', url: 'eventBus' },
         { name: '依赖注入', url: 'provide' },
         { name: '表单验证实例', url: 'form' },
         { name: '局部监听', url: 'onEmit1' },
@@ -95,10 +97,6 @@ export default {
       } else {
         this.showBtn = false
       }
-    },
-    navIndex() {
-      const key = 'navActive'
-      sessionStorage.setItem(key, JSON.stringify({ nav: this.navIndex }))
     }
   },
   created() {
@@ -106,15 +104,26 @@ export default {
   },
   methods: {
     __initNavBar() {
-      let n = sessionStorage.getItem('navActive')
-      if (n) {
-        n = JSON.parse(n)
-        this.navIndex = n.nav
-      }
+      let rName = this.$route.name
+      rName = rName === 'index' ? '/' : rName
+      this.navList.some((v, index) => {
+        if (v.url === rName) {
+          this.navIndex = index
+        }
+      })
     },
     changeNav(index, item) {
       if (this.navIndex === index) return
-      this.navIndex = index
+      if (this.getToken) {
+        let idx
+        this.navList.some((v, i) => {
+          if (v.url === 'mock') {
+            idx = i
+          }
+        })
+        if (idx === index) return
+        this.navIndex = index
+      }
       this.currentNav = item.name
     },
     showHide(data) {
@@ -131,6 +140,7 @@ export default {
         this.$store.dispatch('user/logout').then(() => {
           this.loading = false
           this.$router.push({ name: 'mock' })
+          this.__initNavBar()
         })
       }, 500)
     }

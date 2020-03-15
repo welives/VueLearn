@@ -20,6 +20,11 @@ const routes = [
         component: () => import('@/components/ref-parent-children/demo3')
       },
       {
+        path: 'eventBus',
+        name: 'eventBus',
+        component: () => import('@/components/ref-parent-children/event-bus')
+      },
+      {
         path: 'refDemo4',
         name: 'refDemo4',
         component: () => import('@/components/ref-parent-children/demo4')
