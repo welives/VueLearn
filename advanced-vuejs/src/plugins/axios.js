@@ -32,9 +32,9 @@ service.interceptors.request.use(
     return config
   },
   (error) => {
-    loading.close()
+    loading ? loading.close() : false
     Message.error(error.message)
-    console.log('request error:', error)
+    console.log('request error:', error) // for debug
     return Promise.reject(error)
   },
 )
@@ -42,7 +42,7 @@ service.interceptors.request.use(
 // 响应拦截
 service.interceptors.response.use(
   (response) => {
-    loading.close()
+    loading ? loading.close() : false
     // code为非20000的情况抛错 可结合自己业务进行修改
     const res = response.data
     if (res.code !== 20000) {
@@ -54,15 +54,14 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    loading.close()
+    loading ? loading.close() : false
     Message.error(error.message)
-    console.log('response error:', error)
+    console.log('response error:', error) // for debug
     return Promise.reject(error)
   },
 )
 
 Plugin.install = (Vue, options) => {
-  // Vue.axios = service
   window.axios = service
   Object.defineProperties(Vue.prototype, {
     $axios: {
