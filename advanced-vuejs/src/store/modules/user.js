@@ -3,8 +3,8 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 export default {
   namespaced: true,
   state: {
-    user: {},
-    token: false
+    user: JSON.parse(getToken('user')) || {},
+    token: getToken('token') || false,
   },
   mutations: {
     SET_USER(state, user) {
@@ -12,19 +12,9 @@ export default {
     },
     SET_TOKEN(state, token) {
       state.token = token
-    }
+    },
   },
   actions: {
-    initUser({ commit }) {
-      const user = getToken('user')
-      const token = getToken('token')
-      if (user) {
-        commit('SET_USER', JSON.parse(user))
-      }
-      if (token) {
-        commit('SET_TOKEN', token)
-      }
-    },
     login({ commit }, userInfo) {
       const { username, password } = userInfo
       return new Promise((resolve, reject) => {
@@ -56,6 +46,6 @@ export default {
             reject(error)
           })
       })
-    }
-  }
+    },
+  },
 }
