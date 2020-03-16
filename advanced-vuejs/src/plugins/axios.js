@@ -21,7 +21,7 @@ let loading = false
 service.interceptors.request.use(
   (config) => {
     if (config.token === true) {
-      config.headers['token'] = sessionStorage.getItem('token')
+      config.headers['token'] = Vue.prototype.$cookies.get('token')
     }
     loading = Loading.service({
       lock: true,
