@@ -43,24 +43,24 @@ export default {
   data() {
     return {
       loginForm: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: 'admin',
       },
       loginRules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' }
+          { required: true, message: '请输入用户名', trigger: 'blur' },
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 4, message: '密码长度最少4位', trigger: 'blur' }
-        ]
+          { min: 4, message: '密码长度最少4位', trigger: 'blur' },
+        ],
       },
       checked: true,
-      loading: false
+      loading: false,
     }
   },
   computed: {
-    ...mapGetters(['getToken'])
+    ...mapGetters(['getToken']),
   },
   methods: {
     login() {
@@ -79,8 +79,8 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
-    }
-  }
+    },
+  },
 }
 </script>
 

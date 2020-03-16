@@ -13,18 +13,18 @@ import demoItem from './demo-item.vue'
 export default {
   name: 'RefDemo4',
   components: {
-    demoItem
+    demoItem,
   },
   data() {
     return {
-      header: '我是父组件'
+      header: '我是父组件',
     }
   },
   // 页面渲染完成
   mounted() {
     // $children
     this.$children[0].renameHeader('通过$children修改子组件')
-  }
+  },
 }
 </script>
 <style scoped></style>

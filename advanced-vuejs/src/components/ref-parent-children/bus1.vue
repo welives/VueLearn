@@ -25,7 +25,7 @@ export default {
       btnName1: '通过父组件充当调度器',
       btnName2: '通过依赖注入充当调度器',
       btnName3: '通过事件总线充当调度器',
-      btnName4: '通过全局事件总线充当调度器'
+      btnName4: '通过全局事件总线充当调度器',
     }
   },
   mounted() {
@@ -50,7 +50,7 @@ export default {
     sendMsg1() {
       this.$parent.$emit(
         'toBus2WithParent',
-        '我是bus1组件通过父组件传递过来的消息'
+        '我是bus1组件通过父组件传递过来的消息',
       )
     },
 
@@ -58,7 +58,7 @@ export default {
     sendMsg2() {
       this.$eventBus.$emit(
         'toBus2WithProvide',
-        '我是bus1组件通过依赖注入传递过来的消息'
+        '我是bus1组件通过依赖注入传递过来的消息',
       )
     },
 
@@ -66,7 +66,7 @@ export default {
     sendMsg3() {
       eventBus.$emit(
         'toBus2WithEventBus',
-        '我是bus1组件通过事件总线传递过来的消息'
+        '我是bus1组件通过事件总线传递过来的消息',
       )
     },
 
@@ -74,10 +74,10 @@ export default {
     sendMsg4() {
       this.$bus.$emit(
         'toBus2With$bus',
-        '我是bus1组件通过全局事件总线传递过来的消息'
+        '我是bus1组件通过全局事件总线传递过来的消息',
       )
-    }
-  }
+    },
+  },
 }
 </script>
 

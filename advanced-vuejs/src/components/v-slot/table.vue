@@ -16,7 +16,7 @@ import eTable from './e-table.vue'
 export default {
   name: 'TableDemo',
   components: {
-    eTable
+    eTable,
   },
   data() {
     return {
@@ -24,14 +24,16 @@ export default {
         { name: '姓名', slot: 'name' },
         { name: '性别', slot: 'sex' },
         { name: '年龄', slot: 'age' },
-        { name: '操作', slot: 'action' }
+        { name: '操作', slot: 'action' },
       ],
-      tableData: [
-        { name: '小明', sex: '男', age: 22 },
-        { name: '小红', sex: '女', age: 23 },
-        { name: '小黄', sex: '男', age: 20 }
-      ]
+      tableData: [],
     }
+  },
+  mounted() {
+    let tmp = this.$mock.mock({
+      'tableData|6': [{ name: '@cname', 'sex|1': ['男', '女'], 'age|5-18': 1 }],
+    })
+    this.tableData = [...tmp.tableData]
   },
   methods: {
     edit(item) {
@@ -39,8 +41,8 @@ export default {
     },
     del(index) {
       this.tableData.splice(index, 1)
-    }
-  }
+    },
+  },
 }
 </script>
 

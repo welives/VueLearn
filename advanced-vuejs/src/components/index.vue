@@ -43,7 +43,7 @@ export default {
   provide() {
     return {
       showHide: this.showHide,
-      $_index: this
+      $_index: this,
     }
   },
   data() {
@@ -77,9 +77,9 @@ export default {
         { name: 'Vuex的Getters使用', url: 'getters' },
         { name: 'Vuex的Mutations使用', url: 'mutations' },
         { name: 'Vuex的Actions使用', url: 'actions' },
-        { name: 'Mock模拟登录', url: 'mock' }
+        { name: 'Mock模拟登录', url: 'mock' },
       ],
-      currentNav: '首页'
+      currentNav: '首页',
     }
   },
   computed: {
@@ -88,7 +88,7 @@ export default {
       let arr = []
       arr.push(this.getUser)
       return this.getToken ? arr : []
-    }
+    },
   },
   watch: {
     currentNav(newValue) {
@@ -97,7 +97,7 @@ export default {
       } else {
         this.showBtn = false
       }
-    }
+    },
   },
   created() {
     this.__initNavBar()
@@ -131,7 +131,7 @@ export default {
     },
     clickEvent() {
       this.$emit('test', {
-        value: '我是index.vue的点击事件'
+        value: '我是index.vue的点击事件',
       })
     },
     logout() {
@@ -143,8 +143,8 @@ export default {
           this.__initNavBar()
         })
       }, 500)
-    }
-  }
+    },
+  },
 }
 </script>
 

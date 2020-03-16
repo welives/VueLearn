@@ -27,7 +27,7 @@ service.interceptors.request.use(
       lock: true,
       text: 'Loading',
       spinner: 'el-icon-loading',
-      background: 'rgba(255, 255, 255, 0.5)'
+      background: 'rgba(255, 255, 255, 0.5)',
     })
     return config
   },
@@ -36,7 +36,7 @@ service.interceptors.request.use(
     Message.error(error.message)
     console.log('request error:', error)
     return Promise.reject(error)
-  }
+  },
 )
 
 // 响应拦截
@@ -58,23 +58,18 @@ service.interceptors.response.use(
     Message.error(error.message)
     console.log('response error:', error)
     return Promise.reject(error)
-  }
+  },
 )
 
 Plugin.install = (Vue, options) => {
-  Vue.axios = service
+  // Vue.axios = service
   window.axios = service
   Object.defineProperties(Vue.prototype, {
-    $api: {
-      get() {
-        return service
-      }
-    },
     $axios: {
       get() {
         return service
-      }
-    }
+      },
+    },
   })
 }
 

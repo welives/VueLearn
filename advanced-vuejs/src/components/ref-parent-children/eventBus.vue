@@ -10,21 +10,21 @@
 import bus1 from './bus1'
 import bus2 from './bus2'
 export default {
-  name: 'eventBus',
+  name: 'event-bus',
   provide() {
     return {
-      $eventBus: this
+      $eventBus: this,
     }
   },
   components: {
     bus1,
-    bus2
+    bus2,
   },
   data() {
     return {
-      header: 'evenBus案例'
+      header: 'evenBus案例',
     }
-  }
+  },
 }
 </script>
 
